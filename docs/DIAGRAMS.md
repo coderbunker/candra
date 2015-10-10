@@ -5,16 +5,13 @@
 Use: https://www.websequencediagrams.com/
 
 ```
-title CommunityManagement (Candra)
+title CANDRA WhoIsThere? flow
 Browser->Router: connects to router
-Router->Candra: (cron) push MAC addresses connected + IP
-Candra->Candra: record public IP of router
-Candra->Candra: update active / history
 Browser->Candra: GET /
-Candra->Browser: send main page
-Browser->Browser: find local IP using dummy WebRTC session
-Browser->Candra: GET /login?IP=xxx.xxx.xxx.xxx
-Candra->Browser: set local IP in temporary session
+Candra->Browser: send main page with IP snitch
+Browser->Browser: find local IP using WebRTC
+Browser->Candra: GET /login?IP={xxx.xxx.xxx.xxx,...}
+Candra->Browser: set local IPs in temporary session
 Browser->Candra: selects OAuth
 Candra->Browser: redirect to identity provider
 Browser->Github: Authentication & Authorization
@@ -27,6 +24,10 @@ Candra
 Candra->Browser: return membership selection page
 Browser->Candra: POST membership 
 Candra->Candra: mark user as registered
-Candra->WhoIsThere: notify member present in the space
+Router->Candra: (cron) push MAC addresses connected + IP
+Candra->Candra: record public IP of router
+Candra->Candra: update active / history of each IP -> MAC
+Candra->Candra: match/associate IP<->MAC and MAC<->user
+Candra->WhoIsThere: notify members present in the space
 WhoIsThere->WhoIsThere: display profile image in list
 ```
