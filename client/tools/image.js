@@ -26,10 +26,6 @@ Candra.Tools.resizeImage = function (data) {
         sourceMaxL = image.height;
     }
 
-    console.log(sourceX);
-    console.log(sourceY);
-    console.log(sourceMaxL);
-
     canvas.width = maxLength;
     canvas.height = maxLength;
     canvas.getContext('2d').drawImage(image, sourceX, sourceY, sourceMaxL, sourceMaxL, 0, 0, maxLength, maxLength);

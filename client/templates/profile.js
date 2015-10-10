@@ -9,7 +9,6 @@ Template.profile.events({
         var nameElt = e.currentTarget.elements.deviceName;
 
         if (!Candra.Tools.validateMac(MACElt.value)) {
-            console.log('zlouga');
             Session.set(ERRORS_KEY, {'deviceMac': "Bad MAC address"});
             return;
         }
@@ -47,9 +46,7 @@ Template.profile.events({
 
         reader.onloadend = function () {
             let resizedImg = Candra.Tools.resizeImage(reader.result);
-            console.log(resizedImg);
             Meteor.call('updateProfilePicture', resizedImg);
-            //Session.set('photo', reader.result);
         }
     }
 });

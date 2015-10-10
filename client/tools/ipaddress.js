@@ -35,7 +35,6 @@ Candra.Tools.getLocalIPCandidates = function() {
     function addAddress(newAddr) {
         if (newAddr in addrs) return;
         else addrs[newAddr] = true;
-        console.log(addrs);
         foundAddrs = Object.keys(addrs).filter(function (k) { return addrs[k]; });
 
         Candra.Tools.localIPCandidates.set(foundAddrs);

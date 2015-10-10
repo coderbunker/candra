@@ -5,11 +5,10 @@ Template.whosthere.onCreated(function () {
 
         return _.sortBy(ARPentries.map(entry => {
 
-            console.log("there");
             var user = Meteor.users.findOne({'profile.devices.MAC': entry.MAC});
 
             return {
-                email: user ? user.emails[0].address : '<unknown>',
+                //email: user ? user.emails[0].address : '<unknown>',
                 name: user ? user.profile.name : '<unknown>',
                 MAC: entry.MAC,
                 time: entry.updatedAt,
@@ -20,8 +19,6 @@ Template.whosthere.onCreated(function () {
         }), 'order');
     };
 
-    var b = this.connectedMembers();
-    console.log(b);
 });
 
 Template.whosthere.onRendered(function() {
@@ -54,7 +51,7 @@ Template.whosthere.events({
         var user = this;
         var MAC = e.currentTarget.dataset.value;
 
-        Meteor.call('updateDevice', MAC, user.userId);
+        Meteor.call('updateDevice', MAC, null, user._id);
 
     }
 });
