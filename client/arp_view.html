@@ -1,0 +1,11 @@
+<template name="arpView">
+    <ul>
+        {{#each ARPEntries}}
+            {{>entry}}
+        {{/each}}
+    </ul>
+</template>
+
+<template name="entry">
+    <li>{{MAC}} / {{IP}}</li>
+</template>

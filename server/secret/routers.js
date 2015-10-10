@@ -1,7 +1,7 @@
 Candra.routers = [
 
     {
-        routerId: 'agora',
+        name: 'candra',
         key: 'abcd'
     }
 
