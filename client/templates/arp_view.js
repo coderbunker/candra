@@ -6,7 +6,7 @@ Template.arpView.helpers({
     },
 
     lastCall: function() {
-        return Candra.Collections.ARPEntries.findOne();
+        return Candra.Collections.ARPEntries.findOne('arp').lastCall;
     }
 
 });
