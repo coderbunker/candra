@@ -1,9 +1,12 @@
 Template.whosthere.onCreated(function () {
 
     this.connectedMembers = function () {
-        var ARPentries = Candra.Collections.ARPEntries.find({}, {$sort: {'profile.name': 1}});
+        var ARPentries = Candra.Collections.ARPEntries.find();
 
-        return _.sortBy(ARPentries.map(entry => {
+        var i = 0;
+        console.log(ARPentries.fetch());
+
+        return _.sortBy(_.sortBy(ARPentries.map(entry => {
 
             var user = Meteor.users.findOne({'profile.devices.MAC': entry.MAC});
 
@@ -16,9 +19,8 @@ Template.whosthere.onCreated(function () {
                 order: user ? 0 : 1,
                 unknown: user ? false : true
             };
-        }), 'order');
+        }), 'name'), 'order');
     };
-
 });
 
 Template.whosthere.onRendered(function() {
