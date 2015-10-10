@@ -11,8 +11,8 @@ Router->Candra: (cron) push MAC addresses connected + IP
 Candra->Candra: record public IP of router
 Candra->Candra: update active / history
 Browser->Candra: GET /
-Candra->Browser: send main page with IP snitch
-Browser->Browser: find local IP using WebRTC
+Candra->Browser: send main page
+Browser->Browser: find local IP using dummy WebRTC session
 Browser->Candra: GET /login?IP=xxx.xxx.xxx.xxx
 Candra->Browser: set local IP in temporary session
 Browser->Candra: selects OAuth
