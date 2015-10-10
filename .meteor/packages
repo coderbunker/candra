@@ -25,3 +25,4 @@ flemay:less-autoprefixer
 less
 semantic:ui-css
 accounts-github
+momentjs:moment

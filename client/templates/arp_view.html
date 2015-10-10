@@ -1,11 +1,22 @@
 <template name="arpView">
-    <ul>
-        {{#each ARPEntries}}
-            {{>entry}}
-        {{/each}}
-    </ul>
+
+    <h3>Last API Call: </h3>
+
+    <div class="ui raised segment">
+        {{formatStandardDate lastCall}}
+    </div>
+
+    <h3>ARP table</h3>
+
+    <div class="ui raised segment">
+        <ul>
+            {{#each ARPEntries}}
+                {{>entry}}
+            {{/each}}
+        </ul>
+    </div>
 </template>
 
 <template name="entry">
-    <li>{{MAC}} / {{IP}} ({{updatedAt}})</li>
+    <li>{{MAC}} / {{IP}} ({{formatStandardDate updatedAt}})</li>
 </template>
