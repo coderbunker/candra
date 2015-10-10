@@ -1,0 +1,20 @@
+<template name="main">
+
+    <div class="ui fixed inverted menu">
+        <div class="ui container">
+            <div class="header item">Candra</div>
+            <div class="right item">
+                <span class="email">{{email}}</span>
+                {{#if currentUser}}
+                    <a class="ui inverted button" id="logout" href="#">Logout</a>
+                {{/if}}
+            </div>
+        </div>
+
+    </div>
+
+    <div class="main ui container">
+        {{> yield}}
+    </div>
+
+</template>
