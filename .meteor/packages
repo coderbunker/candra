@@ -21,3 +21,5 @@ insecure                # Allow all DB writes from clients (for prototyping)
 semantic:ui
 less
 useraccounts:semantic-ui
+iron:router
+accounts-password
