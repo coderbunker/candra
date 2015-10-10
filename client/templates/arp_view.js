@@ -5,8 +5,9 @@ Template.arpView.helpers({
         return Candra.Collections.ARPEntries.find();
     },
 
-    lastCall: function() {
-        return Candra.Collections.ARPEntries.findOne('arp').lastCall;
+    lastAPICall: function() {
+
+        return Candra.Collections.LastAPICall.findOne({api:'arp'});
     }
 
 });

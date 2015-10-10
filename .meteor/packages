@@ -26,3 +26,7 @@ less
 semantic:ui-css
 accounts-github
 momentjs:moment
+reactive-var
+check
+aldeed:autoform
+fabienb4:autoform-semantic-ui

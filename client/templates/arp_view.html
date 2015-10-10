@@ -3,7 +3,11 @@
     <h3>Last API Call: </h3>
 
     <div class="ui raised segment">
-        {{formatStandardDate lastCall}}
+        <div class="ui list">
+            <div class="item">Time: {{formatStandardDate lastAPICall.time}}</div>
+            <div class="item">Origin IP: {{lastAPICall.clientIP}}</div>
+            <div class="item">Success: {{lastAPICall.success}}</div>
+        </div>
     </div>
 
     <h3>ARP table</h3>

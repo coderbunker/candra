@@ -2,19 +2,34 @@
 
     <div class="ui fixed inverted menu">
         <div class="ui container">
-            <div class="header item">Candra</div>
-            <div class="right item">
-                <span class="email">{{email}}</span>
-                {{#if currentUser}}
-                    <a class="ui inverted button" id="logout" href="#">Logout</a>
-                {{/if}}
+            <div class="header item">CANDRA</div>
+            <div class="right menu">
+                <div class="ui item">
+                    {{#if currentUser}}
+                        <span class="email">{{email}}</span>
+                        <a class="ui inverted button" id="logout" href="#">Logout</a>
+                    {{/if}}
+                </div>
             </div>
         </div>
 
     </div>
 
     <div class="main ui container">
-        {{> yield}}
+
+        {{#if currentUser}}
+            <div class="ui secondary pointing menu">
+                <a href="{{pathFor 'profile'}}" class="{{routeActive 'profile'}} item">
+                    Profile
+                </a>
+                <a href="{{pathFor 'whosthere'}}" class="{{routeActive 'whosthere'}} item">
+                    Who's there?
+                </a>
+            </div>
+            {{> yield}}
+        {{else}}
+            {{> yield}}
+        {{/if}}
     </div>
 
 </template>

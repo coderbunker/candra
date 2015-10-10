@@ -1,0 +1,59 @@
+<template name="profile">
+
+    <h3>{{currentUser.profile.name}}</h3>
+
+    <img class="ui medium circular image" src="{{currentUser.profile.picture}}">
+
+    <div id="add-profile-picture">
+        <div class="ui form {{errorClass}}">
+            <div class="fields">
+                <div class="field {{errorClass 'deviceName'}}">
+                    <label>Choose a picture</label>
+                    <input id="picture-input" type="file" name="addPicture">
+                    <span class="help-block">{{errorMessage 'addPicture'}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui raised segment">
+        <div class="ui list">
+            <div class="item">My email: {{currentUser.emails.[0].address}}</div>
+            <div class="item">My public IP address: {{remoteIPAddress}}</div>
+            <div class="item">My local IP address: {{localIPCandidates}}</div>
+        </div>
+    </div>
+
+    <h4>My devices</h4>
+
+    <div class="ui raised segment">
+        <div class="ui list">
+            {{#each currentUser.profile.devices}}
+                <div class="item">{{name}} - {{MAC}}</div>
+            {{/each}}
+        </div>
+
+
+        <form action="">
+            <div class="ui form {{errorClass}}">
+                <div class="fields">
+                    <div class="field {{errorClass 'deviceName'}}">
+                        <label>Device name</label>
+                        <input id="deviceName" type="text" placeholder="Device Name">
+                    </div>
+                    <div class="field {{errorClass 'deviceMac'}}">
+                        <label>MAC Address</label>
+                        <input id="deviceMac" type="text" placeholder="MAC Address">
+                    </div>
+                </div>
+                <div class="ui error message">
+                    <p>{{errorMessage 'deviceMac'}}</p>
+                </div>
+                <button class="ui button" type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <canvas id="photo-work"></canvas>
+
+</template>

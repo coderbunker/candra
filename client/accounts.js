@@ -50,3 +50,13 @@ AccountsTemplates.configure({
         }
     }
 });
+
+AccountsTemplates.addField({
+    _id: 'name',
+    type: 'text',
+    displayName: "Full Name",
+    re: /^[a-zA-Z0-9 ]*$/,
+    required: true,
+    trim: true,
+    errStr: 'No special characters allowed in full name',
+});
