@@ -2,8 +2,9 @@
 
 This project was created as part of the Global Meteor 2015 competition (Oct 10th to Oct 12th 2015).
 
-
 [Our submission to the competition](docs/METEOR-2015.md)
+
+Test our demo at: http://candra.meteor.com
 
 ## Goals
 

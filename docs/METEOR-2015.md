@@ -1,6 +1,6 @@
 # CANDRA submission to Global Meteor 2015 competition
 
-From Saturday 16h15 to Sunday 16h15 CST.
+From Saturday October 10th 16h15 to Sunday October 11th 16h15 CST.
 
 ## Inspiration
 
@@ -26,7 +26,7 @@ This results in numerous problems, among which:
 * lack of support and long term maintenance
 * lack of a defacto standard API to third party components to (door locks)
 
-Frederic Bazin (founder of agora-space.com) and Ricky Ng-Adam (cofounder of xinchejian.com) with the help of Julien Choulet (a new active member and MeteorJS specialist) face these challenges regularly. Being software developer, we've decided to address these challenges by prototyping a new management system and including them as a basis for future hackathons and as a teaching tool. 
+Frederic Bazin (founder of agora-space.com) and Ricky Ng-Adam (cofounder of xinchejian.com) with the help of Julien Choulet (a new active member and MeteorJS specialist) face these challenges regularly. Being software developers, we've decided to address these challenges by prototyping a new management system and including them as a basis for future hackathons and as a teaching tool in addition to an actually useful app that can be integrated to our communities. 
 
 ## Goals of the demo
 
@@ -36,7 +36,7 @@ Some of the questions members can ask are:
 * who are ACTIVE members of the community?
 * who is in the space right now?
 
-In addition, authentication is required to gain privileged access to resources (such as Internet or the space itself) after authentication
+In addition, authentication is required to gain privileged access to resources (such as Internet or the space itself) after authentication.
 
 We've decided to focus on:
 
@@ -46,12 +46,14 @@ We've decided to focus on:
 
 ### Who is there?
 
-![Sequence diagram](https://raw.githubusercontent.com/codersfield/candra/master/docs/WhoIsThere.png)
+A sequence diagram explaining the flow we aimed for during the competition:
 
+![Sequence diagram](https://raw.githubusercontent.com/codersfield/candra/master/docs/WhoIsThere.png)
 
 ## Accomplishments we're most proud of
 
-* bridging the gap between networking hardware and modern app development
+* Bridging the gap between networking hardware and modern app development
+* Finding creative ways to identify devices and displaying that in the interface
 
 ## Challenges we ran into
 
