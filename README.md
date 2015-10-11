@@ -92,7 +92,7 @@ We will continue working on the community management system in future hackathons
 
 ```
 curl https://install.meteor.com/ | sh
-git checkout git@github.com:codersfield/candra.git
+git clone git@github.com:codersfield/candra.git
 cd candra
 meteor
 ```
