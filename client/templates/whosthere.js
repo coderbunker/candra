@@ -14,6 +14,8 @@ Template.whosthere.onCreated(function () {
                 //email: user ? user.emails[0].address : '<unknown>',
                 name: user ? user.profile.name : '<unknown>',
                 MAC: entry.MAC,
+                company: entry.company,
+                type: entry.type,
                 time: entry.updatedAt,
                 picture: user ? user.profile.picture : null,
                 order: user ? 0 : 1,
