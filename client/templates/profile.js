@@ -42,7 +42,7 @@ Template.profile.events({
         }
 
         var reader = new FileReader();
-        reader.readAsDataURL(file)
+        reader.readAsDataURL(file);
 
         reader.onloadend = function () {
             let resizedImg = Candra.Tools.resizeImage(reader.result);
