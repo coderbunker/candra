@@ -34,9 +34,8 @@
         </div>
 
 
-        <form action="">
-            <div class="ui form {{errorClass}}">
-                <div class="fields">
+        <form class="ui form {{errorClass}}" action="">
+                <div class="two fields">
                     <div class="field {{errorClass 'deviceName'}}">
                         <label>Device name</label>
                         <input id="deviceName" type="text" placeholder="Device Name">
@@ -50,7 +49,6 @@
                     <p>{{errorMessage 'deviceMac'}}</p>
                 </div>
                 <button class="ui button" type="submit">Add</button>
-            </div>
         </form>
     </div>
 
