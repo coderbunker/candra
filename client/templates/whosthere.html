@@ -1,6 +1,6 @@
 <template name="whosthere">
 
-    <h3>Who's there?</h3>
+    <h1>Who's there?</h1>
 
     <div class="ui four column stackable grid">
         {{#each connectedMembers}}
@@ -19,15 +19,18 @@
                         {{else}}
                             <div class="ui dropdown">
                                 <div class="text">Unknown</div>
-                                <i class="dropdown icon"></i>
 
-                                <div class="menu">
-                                    {{#each allMembers}}
-                                        <div class="item user" data-value="{{../MAC}}">
-                                            {{profile.name}}
-                                        </div>
-                                    {{/each}}
-                                </div>
+                                {{#if currentUser}}
+                                    <i class="dropdown icon"></i>
+
+                                    <div class="menu">
+                                        {{#each allMembers}}
+                                            <div class="item user" data-value="{{../MAC}}">
+                                                {{profile.name}}
+                                            </div>
+                                        {{/each}}
+                                    </div>
+                                {{/if}}
                             </div>
                         {{/unless}}
 
