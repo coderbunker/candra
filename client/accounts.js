@@ -28,7 +28,7 @@ AccountsTemplates.configure({
     termsUrl: 'terms-of-use',
 
     // Redirects
-    homeRoutePath: '/home',
+    homeRoutePath: '/',
     redirectTimeout: 4000,
 
     // Hooks
@@ -49,6 +49,14 @@ AccountsTemplates.configure({
             forgotPwd: "Recover Your Password"
         }
     }
+});
+
+AccountsTemplates.configureRoute('signIn', {
+    redirect: '/'
+});
+
+AccountsTemplates.configureRoute('signUp', {
+    redirect: '/'
 });
 
 AccountsTemplates.addField({
