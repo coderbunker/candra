@@ -7,3 +7,7 @@ Candra.Tools.formatStandardDate = function(date) {
 Template.registerHelper('formatStandardDate', function (date) {
     return Candra.Tools.formatStandardDate(date);
 });
+
+Template.registerHelper('formatDateFromNow', function (date) {
+    return moment(date).fromNow();
+})

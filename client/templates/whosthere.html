@@ -2,7 +2,7 @@
 
     <h1>Who's there?</h1>
 
-    <div class="ui four column stackable grid">
+    <div class="ui four column grid">
         {{#each connectedMembers}}
             <div class="column">
                 <div class="ui fluid card {{unknownMemberClass}}">
@@ -11,6 +11,10 @@
                             <img src="{{picture}}">
                         {{else}}
                             <img src="/tempimage.png?v2">
+                            <div class="meta to_center">
+                              <span class="MAC">{{MAC}}</span><br/>
+                              <span class="hardware">{{company}}</span><br/>
+                            </div>
                         {{/if}}
                     </div>
                     <div class="content">
@@ -35,9 +39,7 @@
                         {{/unless}}
 
                         <div class="meta">
-                            <span class="MAC">MAC address: {{MAC}}</span><br/>
-                            <span class="hardware">Hardware: {{company}}</span><br/>
-                            <span class="date">Arrived at: {{formatStandardDate time}}</span>
+                            <span class="date">{{formatDateFromNow time}}</span>
                         </div>
                     </div>
                 </div>
