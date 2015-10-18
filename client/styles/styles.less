@@ -10,6 +10,20 @@
   .ui.menu > .ui.container {
     width: 100% !important;
   }
+  div.ui.cards > .card > .content > .header:not(.ui), .ui.card > .content > .header:not(.ui), div.ui.dropdown > .text {
+    font-weight: normal;
+    font-size: 0.6em;
+  }
+  .ui.cards > .card .meta, .ui.card .meta{
+    font-size: 0.6em;
+  }
+
+  div.ui.cards > .card .meta, .ui.card > .content > .meta{
+    display: none;
+  }
+  div.ui.cards > .card > .content, .ui.card > .content, div.unknown-connected-member > .content {
+    padding: 0.5em 0.3em;
+  }
 }
 
 .ui.dropdown {
@@ -26,4 +40,16 @@
     left: 0;
     text-align: center;
     transform: translateY(-50%);
+}
+
+
+div.ui.grid>.column:not(.row) {
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+}
+
+div.ui.grid>.column:not(.row), div.ui.grid>.row>.column {
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+
 }
