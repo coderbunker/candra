@@ -1,6 +1,5 @@
 Template.main.helpers({
     email: function() {
-        console.log(Meteor.user());
         return Meteor.user().emails[0].address;
     },
     routeActive: function(name) {
