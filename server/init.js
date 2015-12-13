@@ -1,22 +1,22 @@
-//console.log(process.env);
-ServiceConfiguration.configurations.upsert(
-  { service: "google" },
-  {
-    $set: {
-      clientId: Meteor.settings.google.clientid,
-      loginStyle: "popup",
-      secret: Meteor.settings.google.clientsecret,
+function oauthConfig(service, clientId, secret) {
+   ServiceConfiguration.configurations.upsert(
+    { service: service },
+    {
+      $set: {
+        clientId: clientId,
+        loginStyle: "popup",
+        secret: secret,
+      }
     }
-  }
-);
+  ); 
+}
 
-ServiceConfiguration.configurations.upsert(
-  { service: "github" },
-  {
-    $set: {
-      clientId: Meteor.settings.github.clientid,
-      loginStyle: "popup",
-      secret: Meteor.settings.github.clientsecret,
-    }
-  }
-);
+var config = getCurrentConfiguration();
+
+if(config.github) {
+  oauthConfig('github', config.github.clientId, config.github.secret);
+}
+
+if(config.github) {
+  oauthConfig('google', config.google.clientId, config.google.secret);
+}
