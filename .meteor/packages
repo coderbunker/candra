@@ -32,3 +32,5 @@ aldeed:autoform
 fabienb4:autoform-semantic-ui
 http
 useraccounts:iron-routing 
+accounts-google
+accounts-ui
