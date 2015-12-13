@@ -2,7 +2,7 @@
   // Server authentication info
   "servers": [
     {
-      "host": "hir.hackacademy.org",
+      "host": "members.hackacademy.org",
       "username": "rngadam",
       "env": {}
     }
@@ -22,7 +22,7 @@
   // Configure environment
   // ROOT_URL must be set to your correct domain (https or http)
   "env": {
-    "ROOT_URL": "https://hir.hackacademy.org",
+    "ROOT_URL": "https://members.hackacademy.org",
     "PORT": 3000,
     "UPSTART_UID": "hackacademy"
   },
