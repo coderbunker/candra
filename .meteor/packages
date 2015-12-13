@@ -21,7 +21,7 @@ insecure                # Allow all DB writes from clients (for prototyping)
 useraccounts:semantic-ui
 iron:router
 accounts-password
-flemay:less-autoprefixer
+# flemay:less-autoprefixer
 less
 semantic:ui-css
 accounts-github
@@ -31,4 +31,6 @@ check
 aldeed:autoform
 fabienb4:autoform-semantic-ui
 http
-useraccounts:iron-routing
+useraccounts:iron-routing 
+accounts-google
+accounts-ui
