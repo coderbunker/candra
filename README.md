@@ -30,3 +30,6 @@ git-crypt unlock ../git-crypt-hackacademy-key-file
 meteor run --settings secrets/settings/localhost-3000.json
 ```
 
+### Deployment
+
+see .deploy/README.md
