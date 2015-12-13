@@ -17,3 +17,10 @@ mupx setup
 mupx deploy
 ```
 
+## Configuration
+
+From .deploy:
+
+```
+ln -s ../secrets/settings/members.hackacademy.org.json settings.json
+```
