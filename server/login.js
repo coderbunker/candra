@@ -4,6 +4,7 @@ Accounts.onCreateUser(function(options, user) {
     console.log('error creating user');
     return;
   } else {
+    console.log(options, user)
     if(options.profile) {
       user.profile = options.profile;
     }
