@@ -1,0 +1,11 @@
+<template name="orgs">
+    <h4>My organizations</h4>
+
+    <div class="ui raised segment">
+        <div class="ui list">
+            {{#each currentUser.profile.orgs}}
+                <div class="item">{{name}} - {{MAC}}</div>
+            {{/each}}
+        </div>
+    </div>
+</template>
