@@ -6,7 +6,7 @@
             <div class="right menu">
                 <div class="ui item">
                     {{#if currentUser}}
-                        <span class="email">{{email}}</span>
+                        <span class="email">{{currentUser.profile.email}}</span>
                         <a class="ui inverted button" id="logout" href="#">Logout</a>
                     {{/if}}
                 </div>
@@ -35,6 +35,9 @@
                 </a>
                 <a href="{{pathFor 'whosthere'}}" class="{{routeActive 'whosthere'}} item">
                     Who's there?
+                </a>
+                <a href="{{pathFor 'admin'}}" class="{{routeActive 'admin'}} item">
+                    Admin
                 </a>
             </div>
             {{> yield}}

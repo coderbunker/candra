@@ -8,7 +8,6 @@ Template.main.helpers({
 });
 
 Template.main.events({
-
     'click #logout': function() {
         AccountsTemplates.logout();
     }
