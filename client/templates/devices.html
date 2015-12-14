@@ -1,0 +1,33 @@
+<template name="devices">
+
+    <h4>My devices</h4>
+
+    <div class="ui raised segment">
+        <div class="ui list">
+            {{#each currentUser.profile.devices}}
+                <div class="item">{{name}} - {{MAC}}</div>
+            {{/each}}
+        </div>
+
+
+        <form class="ui form {{errorClass}}" action="">
+                <div class="two fields">
+                    <div class="field {{errorClass 'deviceName'}}">
+                        <label>Device name</label>
+                        <input id="deviceName" type="text" placeholder="Device Name">
+                    </div>
+                    <div class="field {{errorClass 'deviceMac'}}">
+                        <label>MAC Address</label>
+                        <input id="deviceMac" type="text" placeholder="MAC Address">
+                    </div>
+                </div>
+                <div class="ui error message">
+                    <p>{{errorMessage 'deviceMac'}}</p>
+                </div>
+                <button class="ui button" type="submit">Add</button>
+        </form>
+    </div>
+
+    <canvas id="photo-work"></canvas>
+
+</template>

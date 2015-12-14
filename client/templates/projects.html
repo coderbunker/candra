@@ -1,0 +1,11 @@
+<template name="projects">
+    <h4>My projects</h4>
+
+    <div class="ui raised segment">
+        <div class="ui list">
+            {{#each currentUser.profile.projects}}
+                <div class="item">{{name}} - {{MAC}}</div>
+            {{/each}}
+        </div>
+    </div>
+</template>

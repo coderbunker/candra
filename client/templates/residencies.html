@@ -1,0 +1,11 @@
+<template name="residencies">
+    <h4>My Residencies</h4>
+
+    <div class="ui raised segment">
+        <div class="ui list">
+            {{#each currentUser.profile.residencies}}
+                <div class="item">{{name}} - {{MAC}}</div>
+            {{/each}}
+        </div>
+    </div>
+</template>
