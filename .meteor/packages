@@ -33,5 +33,4 @@ http
 useraccounts:iron-routing 
 accounts-google
 service-configuration
-accounts-ui-unstyled
-accounts-ui
+iandouglas:accounts-ui-semantic-ui
