@@ -14,13 +14,15 @@ mupx setup
 ## Deployment
 
 ```
+cd .deploy/members.hackacademy.org
 mupx deploy
 ```
 
 ## Configuration
 
-From .deploy:
+for each app, symlink to the correct deployment setting
 
 ```
-ln -s ../secrets/settings/members.hackacademy.org.json settings.json
+cd .deploy/members.hackacademy.org
+ln -s ../.secrets/settings/members.hackacademy.org.json settings.json
 ```
