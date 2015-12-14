@@ -23,6 +23,8 @@ function initOrgs() {
         Candra.Collections.Orgs.upsert({space: result.data.space}, result.data);
         return result.data;
         console.log(e);
+      } catch(e) {
+        console.log(e);
       }
     } else {
       return exist;
