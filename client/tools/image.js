@@ -1,4 +1,4 @@
-Candra.Tools.resizeImage = function (data) {
+App.Tools.resizeImage = function (data) {
 
     //var width = 240;
     //var image = new Image();

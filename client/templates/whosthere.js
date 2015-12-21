@@ -1,7 +1,7 @@
 Template.whosthere.onCreated(function () {
 
     this.connectedMembers = function () {
-        var ARPentries = Candra.Collections.ARPEntries.find();
+        var ARPentries = App.Collections.ARPEntries.find();
 
         var i = 0;
         console.log(ARPentries.fetch());

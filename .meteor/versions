@@ -4,6 +4,7 @@ accounts-google@1.0.6
 accounts-oauth@1.1.8
 aldeed:autoform@5.8.0
 aldeed:simple-schema@1.1.0
+app-root@1.0.0
 autopublish@1.0.4
 autoupdate@1.2.4
 babel-compiler@5.8.24_1

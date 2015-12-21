@@ -14,13 +14,13 @@ function oauthConfig(service, clientId, secret) {
 function initOrgs() {
   var directory = Meteor.http.call("GET", "http://spaceapi.net/directory.json?api=0.13");
   var urls = Object.keys(directory.data).map(function(k) { 
-    var exist = Candra.Collections.Orgs.findOne({space: k});
+    var exist = App.Collections.Orgs.findOne({space: k});
     if(!exist) {
       try {
         var url = directory.data[k];
         console.log('fetching ' + url);
         var result = Meteor.http.call("GET", url);
-        Candra.Collections.Orgs.upsert({space: result.data.space}, result.data);
+        App.Collections.Orgs.upsert({space: result.data.space}, result.data);
         return result.data;
         console.log(e);
       } catch(e) {

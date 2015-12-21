@@ -25,7 +25,7 @@
         reader.readAsDataURL(file);
 
         reader.onloadend = function () {
-            let resizedImg = Candra.Tools.resizeImage(reader.result);
+            let resizedImg = App.Tools.resizeImage(reader.result);
             Meteor.call('updateProfilePicture', resizedImg);
         }
     }

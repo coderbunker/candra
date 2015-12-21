@@ -1,4 +1,4 @@
-Candra.routers = [
+App.routers = [
 
     {
         name: 'candra',

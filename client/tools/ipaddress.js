@@ -1,11 +1,11 @@
 // NOTE: window.RTCPeerConnection is "not a constructor" in FF22/23
 var RTCPeerConnection = /*window.RTCPeerConnection ||*/ window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
 
-Candra.Tools.localIPCandidates = new ReactiveVar();
+App.Tools.localIPCandidates = new ReactiveVar();
 
-Candra.Tools.remoteIPAddress = new ReactiveVar();
+App.Tools.remoteIPAddress = new ReactiveVar();
 
-Candra.Tools.getLocalIPCandidates = function() {
+App.Tools.getLocalIPCandidates = function() {
 
     var foundAddrs = [];
 
@@ -37,7 +37,7 @@ Candra.Tools.getLocalIPCandidates = function() {
         else addrs[newAddr] = true;
         foundAddrs = Object.keys(addrs).filter(function (k) { return addrs[k]; });
 
-        Candra.Tools.localIPCandidates.set(foundAddrs);
+        App.Tools.localIPCandidates.set(foundAddrs);
     }
 
     function grepSDP(sdp) {

@@ -1,4 +1,4 @@
-Candra.Tools.validateMac = function (mac) {
+App.Tools.validateMac = function (mac) {
 
     mac = mac.toUpperCase();
 

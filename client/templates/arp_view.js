@@ -2,12 +2,12 @@ Template.arpView.helpers({
 
     ARPEntries: function() {
 
-        return Candra.Collections.ARPEntries.find();
+        return App.Collections.ARPEntries.find();
     },
 
     lastAPICall: function() {
 
-        return Candra.Collections.LastAPICall.findOne({api:'arp'});
+        return App.Collections.LastAPICall.findOne({api:'arp'});
     }
 
 });

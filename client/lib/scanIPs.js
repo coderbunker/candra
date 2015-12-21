@@ -1,20 +1,20 @@
 Meteor.startup(() => {
 
-    Candra.Tools.getLocalIPCandidates();
+    App.Tools.getLocalIPCandidates();
 
     Meteor.call('getRemoteIPAddress', function (error, ip) {
 
         if (!error) {
-            Candra.Tools.remoteIPAddress.set(ip);
+            App.Tools.remoteIPAddress.set(ip);
         }
     });
 
     Tracker.autorun(() => {
 
         // Both are reactive variable, this code will rerun with changes
-        var ARPEntries = Candra.Collections.ARPEntries.find();
-        var localIps = Candra.Tools.localIPCandidates.get();
-        var remoteIp = Candra.Tools.remoteIPAddress.get();
+        var ARPEntries = App.Collections.ARPEntries.find();
+        var localIps = App.Tools.localIPCandidates.get();
+        var remoteIp = App.Tools.remoteIPAddress.get();
 
         if (ARPEntries && localIps) {
 
@@ -33,9 +33,9 @@ Meteor.startup(() => {
 });
 
 Template.registerHelper('localIPCandidates', function () {
-    return Candra.Tools.localIPCandidates.get() || "unknown";
+    return App.Tools.localIPCandidates.get() || "unknown";
 });
 
 Template.registerHelper('remoteIPAddress', function () {
-    return Candra.Tools.remoteIPAddress.get() || "unknown";
+    return App.Tools.remoteIPAddress.get() || "unknown";
 });

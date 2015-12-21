@@ -7,7 +7,7 @@ Template.devices.events({
         var MACElt = e.currentTarget.elements.deviceMac;
         var nameElt = e.currentTarget.elements.deviceName;
 
-        if (!Candra.Tools.validateMac(MACElt.value)) {
+        if (!App.Tools.validateMac(MACElt.value)) {
             Session.set(ERRORS_KEY, {'deviceMac': "Bad MAC address"});
             return;
         }
