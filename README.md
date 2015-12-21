@@ -25,8 +25,10 @@ Typical tasks include:
 ```
 curl https://install.meteor.com/ | sh
 git clone git@github.com:codersfield/candra.git
-cd candra
-git-crypt unlock ../git-crypt-hackacademy-key-file
+cd candra/app
+
+// Create and put your private key in candra/keys directory
+git-crypt unlock keys/git-crypt-hackacademy-key-file
 meteor run --settings secrets/settings/localhost-3000.json
 ```
 
