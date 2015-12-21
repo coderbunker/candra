@@ -1,0 +1,1 @@
+App.Collections.Orgs = new Mongo.Collection('orgs');
