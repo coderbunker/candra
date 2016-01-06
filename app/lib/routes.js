@@ -5,6 +5,12 @@ FlowRouter.route('/', {
   }
 });
 
+FlowRouter.notFound = {
+  action() {
+    FlowRouter.go('home');
+  }
+};
+
 FlowRouter.route('/login', {
   name: 'login',
   action() {
