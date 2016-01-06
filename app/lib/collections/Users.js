@@ -26,6 +26,19 @@ App.Schemas.UserProfile = new SimpleSchema({
   qq: {
     type: String,
     optional: true
+  },
+  devices: {
+    type: new SimpleSchema({
+      name: {
+        type: String,
+        optional: true
+      },
+      MAC: {
+        type: String,
+        optional: true
+      }
+    }),
+    optional: true
   }
 });
 
