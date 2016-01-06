@@ -3,6 +3,7 @@ accounts-github@1.0.6
 accounts-google@1.0.6
 accounts-oauth@1.1.8
 aldeed:autoform@5.8.1
+aldeed:collection2@2.3.1
 aldeed:simple-schema@1.1.0
 app-root@1.0.0
 autopublish@1.0.4

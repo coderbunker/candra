@@ -7,7 +7,7 @@ Package.describe({
 Package.onUse(function (api) {
 
   //api.use('infinitedg:winston', 'server');
-  api.addFiles('lib/base_all.js', ['client', 'server']);
+  api.addFiles('lib/base_common.js', ['client', 'server']);
   api.addFiles('lib/base_client.js', 'client');
   api.addFiles('lib/base_server.js', 'server');
 
