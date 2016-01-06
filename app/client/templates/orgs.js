@@ -26,7 +26,7 @@
 
         reader.onloadend = function () {
             let resizedImg = App.Tools.resizeImage(reader.result);
-            Meteor.call('updateProfilePicture', resizedImg);
+            Meteor.call('user/updateProfilePicture', resizedImg);
         }
     }
 });

@@ -12,7 +12,7 @@ Template.devices.events({
             return;
         }
 
-        Meteor.call('updateDevice', MACElt.value, nameElt.value);
+        Meteor.call('user/updateDevice', MACElt.value, nameElt.value);
 
         MACElt.value = '';
         nameElt.value = '';

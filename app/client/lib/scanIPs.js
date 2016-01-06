@@ -2,7 +2,7 @@ Meteor.startup(() => {
 
     App.Tools.getLocalIPCandidates();
 
-    Meteor.call('getRemoteIPAddress', function (error, ip) {
+    Meteor.call('user/getRemoteIPAddress', function (error, ip) {
 
         if (!error) {
             App.Tools.remoteIPAddress.set(ip);

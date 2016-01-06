@@ -54,7 +54,7 @@ Template.whosthere.events({
         var user = this;
         var MAC = e.currentTarget.dataset.value;
 
-        Meteor.call('updateDevice', MAC, null, user._id);
+        Meteor.call('user/updateDevice', MAC, null, user._id);
 
     }
 });

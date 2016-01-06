@@ -1,5 +1,5 @@
 Meteor.methods({
-  'flushdb': function() {
+  'admin/flushdb': function() {
     console.log('removing all users!');
     Meteor.users.remove({});
   }

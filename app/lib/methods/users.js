@@ -1,5 +1,5 @@
 Meteor.methods({
-  'updateProfilePicture': function(picture) {
+  'user/updateProfilePicture': function(picture) {
 
     check(picture, String);
     Meteor.users.update(this.userId, {$set: {'profile.picture': picture}});
@@ -7,7 +7,7 @@ Meteor.methods({
     return true;
   },
 
-  'updateDevice': function (MAC, name, userId) {
+  'user/updateDevice': function (MAC, name, userId) {
 
     check(userId, String);
     check(MAC, String);
@@ -20,7 +20,7 @@ Meteor.methods({
     App.Services.Users.updateDevice(userId, {MAC: MAC, name: name});
   },
 
-  'getRemoteIPAddress': function() {
+  'user/getRemoteIPAddress': function() {
 
     if (this.isSimulation) return;
 
