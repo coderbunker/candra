@@ -67,3 +67,7 @@ AccountsTemplates.addField({
     trim: true,
     errStr: 'No special characters allowed in full name',
 });
+
+Accounts.onLogin(function() {
+    FlowRouter.go('home');
+});
