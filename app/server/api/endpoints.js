@@ -4,13 +4,13 @@ RouterApi = new Restivus({
 });
 
 RouterApi.addRoute(
-  'router/arp/:name',
+  'arp/:name',
   {authRequired: false},
   {
     post() {
 
       var ARPEntries = App.Collections.ARPEntries;
-      var LastAPICall = App.Collections.LastAPICall;
+      var APICalls = App.Collections.APICalls;
       var request = this.request;
       var response = this.response;
       var key, arpTable, headers = request.headers;
@@ -34,7 +34,7 @@ RouterApi.addRoute(
         return;
       }
 
-      LastAPICall.upsert({api: 'arp'}, {api: 'arp', time: new Date(), clientIP: request.headers['x-forwarded-for']});
+      APICalls.upsert({api: 'arp'}, {api: 'arp', time: new Date(), clientIP: request.headers['x-forwarded-for']});
 
       arpTable = request.body.arpTable;
 
@@ -65,7 +65,7 @@ RouterApi.addRoute(
         // If MAC address doesn't exist in mongodb, add it
         if (!ARPEntry) {
 
-          var response
+          var response;
 
           try {
             response = HTTP.call("POST", "http://api.macvendors.com/" + entry.MAC);
@@ -104,7 +104,7 @@ RouterApi.addRoute(
         ARPEntries.remove({MAC: MAC});
       });
 
-      LastAPICall.update({api: 'arp'}, {$set: {success: true}});
+      APICalls.update({api: 'arp'}, {$set: {success: true}});
 
       response.end(JSON.stringify({success: true, message: 'successfully retrieved data'}));
 

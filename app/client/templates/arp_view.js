@@ -7,7 +7,7 @@ Template.arpView.helpers({
 
     lastAPICall: function() {
 
-        return App.Collections.LastAPICall.findOne({api:'arp'});
+        return App.Collections.APICalls.findOne({api:'arp'}, {sort: {time: -1}});
     }
 
 });

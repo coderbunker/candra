@@ -1,1 +1,0 @@
-App.Collections.LastAPICall = new Mongo.Collection('lastapicall');
