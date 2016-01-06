@@ -1,0 +1,11 @@
+<template name="layoutDefault">
+
+    {{#forceLoggin}}
+        {{> menuTop}}
+        {{> Template.dynamic template=header}}
+        <div class="main ui container">
+            {{> Template.dynamic template=content}}
+        </div>
+    {{/forceLoggin}}
+
+</template>

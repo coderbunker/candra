@@ -1,0 +1,21 @@
+<template name="menuTop">
+
+    <div class="ui fixed inverted borderless menu">
+        <div class="ui container">
+            <div class="header item">{{appName}}</div>
+            {{#if currentUser}}
+                <div class="right menu">
+                    <div class="ui item">
+                        <span class="email">{{currentUser.profile.email}}</span>
+                        <a class="ui inverted button" id="logout" href="#">Logout</a>
+                    </div>
+                </div>
+            {{else}}
+                <div class="right item item-login">
+                    {{> loginButtons }}
+                </div>
+            {{/if}}
+        </div>
+    </div>
+
+</template>

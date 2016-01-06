@@ -29,7 +29,7 @@ cd candra/app
 
 // Create and put your private key in candra/keys directory
 git-crypt unlock keys/git-crypt-hackacademy-key-file
-meteor run --settings secrets/settings/localhost-3000.json
+meteor run --settings ../secrets/settings/localhost-3000.json
 ```
 
 ### Deployment

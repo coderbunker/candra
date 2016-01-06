@@ -4,7 +4,6 @@ Template.whosthere.onCreated(function () {
         var ARPentries = App.Collections.ARPEntries.find();
 
         var i = 0;
-        console.log(ARPentries.fetch());
 
         return _.sortBy(_.sortBy(ARPentries.map(entry => {
 

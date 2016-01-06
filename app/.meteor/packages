@@ -16,10 +16,8 @@ standard-minifiers      # JS/CSS minifiers run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 
-autopublish             # Publish all data to the clients (for prototyping)
 insecure                # Allow all DB writes from clients (for prototyping)
 useraccounts:semantic-ui
-iron:router
 # flemay:less-autoprefixer
 less
 semantic:ui-css
@@ -30,10 +28,14 @@ check
 aldeed:autoform
 fabienb4:autoform-semantic-ui
 http
-useraccounts:iron-routing 
 accounts-google
 service-configuration
 iandouglas:accounts-ui-semantic-ui
 jparker:gravatar
 vsivsi:job-collection
 app-root
+autopublish
+nimble:restivus
+kadira:blaze-layout
+kadira:flow-router
+useraccounts:flow-routing

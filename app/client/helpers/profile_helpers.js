@@ -1,9 +1,6 @@
-
 function userEmail() {
-  if(Meteor.user().profile.email)
-    return Meteor.user().profile.email;
-  else
-    return "unknown@example.com";
+  var profile = Meteor.user() && Meteor.user().profile;
+  return (profile && profile.email) || "unknown@example.com";
 }
 
 UI.registerHelper('profilePictureUrl', function(context, options) {

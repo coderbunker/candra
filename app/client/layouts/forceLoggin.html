@@ -1,0 +1,7 @@
+<template name="forceLoggin">
+    {{#unless userLogginIn}}
+        {{>Template.contentBlock}}
+    {{else}}
+        {{>spinner}}
+    {{/unless}}
+</template>

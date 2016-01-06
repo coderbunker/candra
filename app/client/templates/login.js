@@ -1,4 +1,4 @@
-Accounts.onLogin = function() {
-  Router.go('home');
-};
+Accounts.onLogin(function() {
+  FlowRouter.go('home');
+});
 
