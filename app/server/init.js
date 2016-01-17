@@ -16,6 +16,7 @@ function initOrgs() {
   var urls = Object.keys(directory.data).map(function (k) {
 
     if (!App.Collections.Orgs.findOne({space: k})) {
+      console.log(k);
       // Execute http calls asynchronously so we don't block execution for client inbound client request
       // Meteor.defer = Meteor.setTimeout(x, 0)
       var url = directory.data[k];
@@ -24,12 +25,27 @@ function initOrgs() {
         try {
           console.log('fetching ' + url);
           var result = Meteor.http.call("GET", url);
-          console.log(result.data);
-          App.Collections.Orgs.upsert({space: result.data.space}, result.data);
 
+          var data;
+          try {
+            data = JSON.parse(result.content);
+          } catch(e) {
+            data = result.data;
+          }
+
+          if (!data) {
+            console.log("No data found or invalid response for: " + url);
+            return;
+          }
+          App.Collections.Orgs.upsert({space: k}, {
+            space: k,
+            data: data
+          });
         } catch (e) {
+          console.log("Error getting data for: " + url);
           console.log(e);
         }
+
       });
       return url;
     } else {
