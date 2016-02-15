@@ -1,0 +1,38 @@
+<template name="search">
+  <div class="container">
+    {{> searchBox }}
+    {{> searchResult}}
+  </div>
+</template>
+
+<template name="searchBox">
+  <input type="text" id="search-box" placeholder="search organizations here" />
+</template>
+
+<template name="searchResult">
+  <div id='search-result'>
+    <div id="search-meta">
+      {{#if isLoading}}
+        searching ...
+      {{/if}}
+    </div>
+
+    {{#each getOrgs}}
+    <div class="org">
+      <h4 class="name">
+        <a href="{{url}}" target="_blank">
+          {{{space}}}<br>
+          {{#if logo}}
+          <img src="{{logo}}" height=100>
+          {{/if}}<br>
+          {{{location.address}}}<br>
+        </a>
+        <button name="org-member">I'm a member of this space</button>
+      </h4>
+      <div class="description">
+        {{{description}}}
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</template>
