@@ -58,12 +58,14 @@ function initOrgs() {
 
 Meteor.startup(function () {
   var config = getCurrentConfiguration();
-
+  console.log(JSON.stringify(config));
   if (config.github) {
+    console.log("Github login configured");
     oauthConfig('github', config.github.clientId, config.github.secret);
   }
 
-  if (config.github) {
+  if (config.google) {
+    console.log("Google login configured");
     oauthConfig('google', config.google.clientId, config.google.secret);
   }
 
