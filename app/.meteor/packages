@@ -23,7 +23,7 @@ semantic:ui-css
 accounts-github@1.0.10
 momentjs:moment
 reactive-var@1.0.10
-check@1.2.3
+check
 aldeed:autoform
 fabienb4:autoform-semantic-ui
 http@1.2.9

@@ -1,4 +1,8 @@
 function oauthConfig(service, clientId, secret) {
+  check(service, String);
+  check(clientId, String);
+  check(secret, String);
+  
   ServiceConfiguration.configurations.upsert(
     {service: service},
     {
