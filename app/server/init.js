@@ -72,6 +72,7 @@ Meteor.startup(function () {
     console.log("Google login configured");
     oauthConfig('google', config.google.clientId, config.google.secret);
   }
-
-  console.log(initOrgs());
+  if(Meteor.settings.spaceapienabled) {
+    console.log(initOrgs());  
+  }
 });
