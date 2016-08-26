@@ -5,13 +5,15 @@ Accounts.onCreateUser(function(options, user) {
     return;
   } else {
     user.profile = options.profile;
-
     if(user.services.github) {
       user.profile.email = user.services.github.email;
       // TODO: array of objects is rejected by Mongo
       // fails with "RangeError: Maximum call stack size exceeded"
       // user.emails = user.services.github.emails;
-    }
+    } 
+	if(user.services.google){
+		user.profile.email = user.services.google.email;
+	}
     console.log(user);
     return user;
   }
