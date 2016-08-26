@@ -3,5 +3,5 @@ getCurrentConfiguration = function() {
 };
 
 UI.registerHelper('appName', function(context, options) {
-  return getCurrentConfiguration().spaceapi.space;
+  return Meteor.settings.public.spaceapi.space;
 });
