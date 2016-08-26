@@ -1,5 +1,5 @@
 getCurrentConfiguration = function() {
-  return Meteor.settings.public;
+  return Meteor.settings;
 };
 
 UI.registerHelper('appName', function(context, options) {
