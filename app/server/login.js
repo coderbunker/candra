@@ -9,11 +9,12 @@ Accounts.onCreateUser(function(options, user) {
 
     if(user.services.github) {
       user.profile.email = user.services.github.email;
-      // TODO: array of objects is rejected by Mongo
-      // fails with "RangeError: Maximum call stack size exceeded"
-      // user.emails = user.services.github.emails;
+      user.emails = user.services.github.emails.map(function(o) {
+        return { address: o.email, verified: o.verified };
+      });
+      delete user.services.github.emails;
     }
-    console.log(user);
+    console.log(JSON.stringify(user));
     return user;
   }
 });
