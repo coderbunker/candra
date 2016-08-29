@@ -1,0 +1,27 @@
+<template name="members">
+  <div class="ui horizontal divider">
+    Members
+  </div>
+  <div class="ui three column grid">
+  {{#each members}}
+    {{> membersRow }}
+  {{/each}}
+  </div>
+</template>
+
+<template name='membersRow'>
+  <div class='row'>
+    {{#each row }}
+      {{> memberItem}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="memberItem">
+  <div class="column">
+    <p><img class="ui fluid image rounded" src="{{profile.image_url}}"/></p>
+    <h3>{{profile.name}}</h3>
+    <p> {{profile.title}} </p>
+    <p> {{profile.bio}} </p>
+  </div>
+</template>
