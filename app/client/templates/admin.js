@@ -20,7 +20,7 @@ Template.admin.helpers({
                 {key: 'profile.name', label: 'name'},
                 {key: 'profile.title', label: 'title'},
                 {key: 'profile.bio', label: 'bio'},
-                {key: 'profile.image_url', label: 'image_url'}
+                {key: 'profile.image_url', label: 'image', tmpl: Template.userPhoto}
               ]
           };
   }

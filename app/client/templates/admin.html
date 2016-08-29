@@ -4,3 +4,7 @@
   </div>
   {{> collectionTable collection=users class="table table-bordered table-hover" settings=settings }}
 </template>
+
+<template name="userPhoto">
+  <img class="ui small image" src="{{profile.image_url}}">
+</template>
