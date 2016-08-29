@@ -2,7 +2,7 @@ function oauthConfig(service, clientId, secret) {
   check(service, String);
   check(clientId, String);
   check(secret, String);
-  
+
   ServiceConfiguration.configurations.upsert(
     {service: service},
     {
@@ -62,7 +62,7 @@ function initOrgs() {
 
 Meteor.startup(function () {
   var config = getCurrentConfiguration();
-  console.log(JSON.stringify(config));
+  console.log(config);
   if (config.github) {
     console.log("Github login configured");
     oauthConfig('github', config.github.clientId, config.github.secret);
@@ -72,6 +72,7 @@ Meteor.startup(function () {
     console.log("Google login configured");
     oauthConfig('google', config.google.clientId, config.google.secret);
   }
-
-  console.log(initOrgs());
+  if(Meteor.settings.spaceapienabled) {
+    console.log(initOrgs());  
+  }
 });

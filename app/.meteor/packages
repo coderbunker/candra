@@ -40,7 +40,6 @@ kadira:flow-router
 useraccounts:flow-routing
 aldeed:collection2
 sacha:spin
-peerlibrary:stacktrace
 standard-minifier-css
 standard-minifier-js
 shell-server

@@ -12,11 +12,11 @@
         </div>
     </div>
 
-    <h4>My emails</h4>
+    <h4>My emails ({{currentUser.emails.length}})</h4>
     <div class="ui raised segment">
         <div class="ui list">
-            {{#each currentUser.emails}}
-                <div class="item">{{email}}</div>
+            {{#each email in currentUser.emails}}
+                <div class="item">{{email.address}}</div>
             {{/each}}
         </div>
     </div>
