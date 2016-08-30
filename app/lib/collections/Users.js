@@ -1,7 +1,7 @@
 App.Schemas.UserProfile = new SimpleSchema({
   name: {
     type: String,
-    optional: true
+    optional: false
   },
   title: {
     type: String,
@@ -17,7 +17,7 @@ App.Schemas.UserProfile = new SimpleSchema({
   },
   email: {
     type: String,
-    optional: true
+    optional: false
   },
   address: {
     type: String,

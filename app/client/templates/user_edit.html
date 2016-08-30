@@ -1,26 +1,11 @@
 <template name="user_edit">
   {{> afQuickField name='profile.name'}}
-  {{#if afFieldIsInvalid name='profile.name'}}
-  <span class="help-block">{{afFieldMessage name='profile.name'}}</span>
-  {{/if}}
 
   {{> afQuickField name='profile.email'}}
-  {{#if afFieldIsInvalid name='profile.email'}}
-  <span class="help-block">{{afFieldMessage name='profile.email'}}</span>
-  {{/if}}
 
   {{> afQuickField name='profile.title'}}
-  {{#if afFieldIsInvalid name='profile.title'}}
-  <span class="help-block">{{afFieldMessage name='profile.title'}}</span>
-  {{/if}}
 
   {{> afQuickField name='profile.bio' rows=6}}
-  {{#if afFieldIsInvalid name='profile.bio'}}
-  <span class="help-block">{{afFieldMessage name='profile.bio'}}</span>
-  {{/if}}
 
   {{> afQuickField name='profile.image_url'}}
-  {{#if afFieldIsInvalid name='profile.image_url'}}
-  <span class="help-block">{{afFieldMessage name='profile.image_url'}}</span>
-  {{/if}}
 </template>
