@@ -10,5 +10,8 @@ Template.members.helpers({
     }
     chunks.push({row: all});
     return chunks;
+  },
+  membersCount: function() {
+    return Meteor.users.find().count();
   }
 });
