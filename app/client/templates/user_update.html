@@ -2,31 +2,7 @@
   {{#autoForm collection=users doc=user id="updateUserForm" type="update"}}
     <fieldset>
       <legend>Update a User</legend>
-      {{> afQuickField name='profile.name'}}
-      {{#if afFieldIsInvalid name='profile.name'}}
-      <span class="help-block">{{afFieldMessage name='profile.name'}}</span>
-      {{/if}}
-
-      {{> afQuickField name='profile.email'}}
-      {{#if afFieldIsInvalid name='profile.name'}}
-      <span class="help-block">{{afFieldMessage name='profile.name'}}</span>
-      {{/if}}
-
-      {{> afQuickField name='profile.title'}}
-      {{#if afFieldIsInvalid name='profile.title'}}
-      <span class="help-block">{{afFieldMessage name='profile.title'}}</span>
-      {{/if}}
-
-      {{> afQuickField name='profile.bio' rows=6}}
-      {{#if afFieldIsInvalid name='profile.bio'}}
-      <span class="help-block">{{afFieldMessage name='profile.bio'}}</span>
-      {{/if}}
-
-      {{> afQuickField name='profile.image_url'}}
-      {{#if afFieldIsInvalid name='profile.image_url'}}
-      <span class="help-block">{{afFieldMessage name='profile.image_url'}}</span>
-      {{/if}}
-      
+      {{> user_edit}}
       <button type="submit" class="btn btn-primary">Update User</button>
     </fieldset>
   {{/autoForm}}
