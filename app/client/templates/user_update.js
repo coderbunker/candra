@@ -9,7 +9,6 @@ AutoForm.hooks({
 
 Template.user_update.helpers({
     user: function() {
-      var u = Meteor.users.findOne(FlowRouter.getParam('_id'));
-      return u;
+      return Meteor.users.findOne(FlowRouter.getParam('_id'));
     }
 });
