@@ -1,0 +1,9 @@
+<template name="user_update">
+  {{#autoForm collection=users doc=user id="updateUserForm" type="update"}}
+    <fieldset>
+      <legend>Update a User</legend>
+      {{> user_edit}}
+      <button type="submit" class="btn btn-primary">Update User</button>
+    </fieldset>
+  {{/autoForm}}
+</template>

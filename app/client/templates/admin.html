@@ -2,4 +2,9 @@
   <div class="ui item">
     <a class="ui button" id="flushdb" href="#">FlushDB</a>
   </div>
+  {{> collectionTable collection=users class="table table-bordered table-hover" settings=settings }}
+</template>
+
+<template name="userPhoto">
+  <img class="ui small image" src="{{profilePictureUrl size=300}}">
 </template>

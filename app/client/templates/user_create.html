@@ -1,0 +1,9 @@
+<template name="user_create">
+  {{#autoForm collection=users id="insertUserForm" type="insert"}}
+    <fieldset>
+      <legend>Add a User</legend>
+      {{> user_edit}}
+      <button type="submit" class="btn btn-primary">Insert User</button>
+    </fieldset>
+  {{/autoForm}}
+</template>

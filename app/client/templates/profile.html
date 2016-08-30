@@ -1,23 +1,32 @@
 <template name="profile">
 
-    <h3>{{currentUser.profile.name}}</h3>
+    {{#with currentUser}}
+    <h3>{{profile.name}}</h3>
 
     <img class="ui medium circular image" src="{{ profilePictureUrl size=300 }}">
 
     <div class="ui raised segment">
         <div class="ui list">
-            <div class="item">My email: {{currentUser.profile.email}}</div>
-            <div class="item">My public IP address: {{remoteIPAddress}}</div>
-            <div class="item">My local IP address: {{localIPCandidates}}</div>
+            <div class="item">Title: {{profile.title}}</div>
+            <div class="item">Bio: {{profile.bio}}</div>
+            <div class="item">My email: {{profile.email}}</div>
         </div>
     </div>
 
-    <h4>My emails ({{currentUser.emails.length}})</h4>
+    <h4>My emails ({{emails.length}})</h4>
     <div class="ui raised segment">
         <div class="ui list">
-            {{#each email in currentUser.emails}}
+            {{#each email in emails}}
                 <div class="item">{{email.address}}</div>
             {{/each}}
+        </div>
+    </div>
+    {{/with}}
+
+    <div class="ui raised segment">
+        <div class="ui list">
+            <div class="item">My public IP address: {{remoteIPAddress}}</div>
+            <div class="item">My local IP address: {{localIPCandidates}}</div>
         </div>
     </div>
 

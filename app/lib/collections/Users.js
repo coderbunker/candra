@@ -3,9 +3,21 @@ App.Schemas.UserProfile = new SimpleSchema({
     type: String,
     optional: true
   },
-  email: {
+  title: {
     type: String,
     optional: true
+  },
+  bio: {
+    type: String,
+    optional: true
+  },
+  image_url: {
+    type: String,
+    optional: true
+  },
+  email: {
+    type: String,
+    optional: false
   },
   address: {
     type: String,
@@ -68,7 +80,17 @@ App.Schemas.User = new SimpleSchema({
     type: Boolean
   },
   createdAt: {
-    type: Date
+    type: Date,
+    // https://github.com/aldeed/meteor-autoform/issues/955
+    autoValue: function() {
+      if (this.isInsert) {
+        return new Date;
+      } else if (this.isUpsert) {
+        return {$setOnInsert: new Date};
+      } else {
+        this.unset();
+      }
+    }
   },
   profile: {
     type: App.Schemas.UserProfile,

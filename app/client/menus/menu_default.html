@@ -1,7 +1,5 @@
 <template name="menuDefault">
 
-    {{>menuTop}}
-
     <div class="top ui container">
         <div class="ui secondary pointing menu">
             <a href="{{pathFor 'profile'}}" class="{{routeActive 'profile'}} item">
@@ -12,6 +10,10 @@
             </a>
             <a href="{{pathFor 'orgs'}}" class="{{routeActive 'orgs'}} item">
                 Organizations
+            </a>
+
+            <a href="{{pathFor 'members'}}" class="{{routeActive 'members'}} item">
+                Members
             </a>
             <a href="{{pathFor 'projects'}}" class="{{routeActive 'projects'}} item">
                 Projects

@@ -66,3 +66,11 @@ div.ui.grid>.column:not(.row), div.ui.grid>.row>.column {
   padding-right: 0.3rem;
 
 }
+
+// because of https://github.com/urbanetic/meteor-utility/blob/master/src/forms.less
+.ui.form .required:before {
+ all: initial;
+  * {
+    all: unset;
+  }
+}

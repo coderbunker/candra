@@ -43,3 +43,7 @@ sacha:spin
 standard-minifier-css
 standard-minifier-js
 shell-server
+aslagle:reactive-table
+fortawesome:fontawesome
+aramk:collection-table
+aldeed:tabular

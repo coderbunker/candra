@@ -4,7 +4,14 @@ function userEmail() {
 }
 
 UI.registerHelper('profilePictureUrl', function(context, options) {
-  return Gravatar.imageUrl(userEmail(), context.hash);
+  if(this.profile && this.profile.image_url) {
+    return this.profile.image_url;
+  }
+  if(this.profile && this.profile.email) {
+    return Gravatar.imageUrl(this.profile.email, context.hash);
+  }
+  return Gravatar.imageUrl('hello@example.com', context.hash);
+
 });
 
 UI.registerHelper('emailAddress', function(context, options) {
