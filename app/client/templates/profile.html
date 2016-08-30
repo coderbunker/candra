@@ -2,7 +2,9 @@
 
     <h3>{{currentUser.profile.name}}</h3>
 
+    {{#with currentUser}}
     <img class="ui medium circular image" src="{{ profilePictureUrl size=300 }}">
+    {{/with}}
 
     <div class="ui raised segment">
         <div class="ui list">
