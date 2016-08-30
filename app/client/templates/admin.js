@@ -1,3 +1,7 @@
+Template.admin.onCreated(function () {
+    Meteor.subscribe('Meteor.users');
+});
+
 Template.admin.events({
     'click #flushdb': function() {
       console.log('flushing db');
@@ -17,7 +21,9 @@ Template.admin.helpers({
                 console.log('onEdit ' + params.ids);
                 FlowRouter.go('/users/' + params.ids[0] + '/edit');
               },
-
+              onDelete: function(params) {
+                Meteor.call('users.remove', params.ids);
+              },
               collection: Meteor.users,
               rowsPerPage: 10,
               showFilter: true,

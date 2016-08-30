@@ -1,3 +1,6 @@
+Template.members.onCreated(function () {
+    Meteor.subscribe('Meteor.users');
+});
 
 Template.members.helpers({
   members: function () {
