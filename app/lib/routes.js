@@ -39,6 +39,13 @@ FlowRouter.route('/orgs', {
   }
 });
 
+FlowRouter.route('/members', {
+  name: 'members',
+  action() {
+    BlazeLayout.render('layoutDefault', {header: 'menuDefault', content: 'members'});
+  }
+});
+
 FlowRouter.route('/projects', {
   name: 'projects',
   action() {
@@ -95,6 +102,18 @@ publicRoutes.route('/whosthere', {
     }
     else {
       BlazeLayout.render('layoutPublic', {content: 'whosthere'});
+    }
+  }
+});
+
+publicRoutes.route('/members', {
+  name: 'members',
+  action() {
+    if (Meteor.userId()) {
+      BlazeLayout.render('layoutDefault', {header: 'menuDefault', content: 'members'});
+    }
+    else {
+      BlazeLayout.render('layoutPublic', {content: 'members'});
     }
   }
 });
