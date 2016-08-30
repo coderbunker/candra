@@ -10,8 +10,14 @@ Template.admin.helpers({
           return {
               onCreate: function() {
                 console.log('onCreate');
-                FlowRouter.go('/user/create');
+                FlowRouter.go('/users/create');
               },
+              onEdit: function(params) {
+                console.log(params);
+                console.log('onEdit ' + params.ids);
+                FlowRouter.go('/users/' + params.ids[0] + '/edit');
+              },
+
               collection: Meteor.users,
               rowsPerPage: 10,
               showFilter: true,

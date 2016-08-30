@@ -67,12 +67,20 @@ FlowRouter.route('/admin', {
   }
 });
 
-FlowRouter.route('/user/create', {
+FlowRouter.route('/users/create', {
   name: 'create',
   action() {
     BlazeLayout.render('layoutDefault', {header: 'menuDefault', content: 'user_create'});
   }
 });
+
+FlowRouter.route('/users/:_id/edit', {
+  name: 'edit',
+  action() {
+    BlazeLayout.render('layoutDefault', {header: 'menuDefault', content: 'user_update'});
+  }
+});
+
 
 var publicRoutes = FlowRouter.group({
   name: 'public',
