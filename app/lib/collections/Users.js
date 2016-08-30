@@ -1,7 +1,7 @@
 App.Schemas.UserProfile = new SimpleSchema({
   name: {
     type: String,
-    optional: false
+    optional: true
   },
   title: {
     type: String,
