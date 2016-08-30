@@ -14,7 +14,7 @@ FlowRouter.notFound = {
 FlowRouter.route('/login', {
   name: 'login',
   action() {
-    BlazeLayout.render('layoutPublic', {header: 'menuDefault', content: 'login'});
+    BlazeLayout.render('layoutLogin', {header: 'menuDefault', content: 'login'});
   }
 });
 
@@ -88,6 +88,12 @@ FlowRouter.route('/users/:_id/edit', {
   }
 });
 
+FlowRouter.route('/whosthere', {
+  name: 'whosthere',
+  action() {
+    BlazeLayout.render('layoutDefault', {header: 'menuDefault', content: 'whosthere'});
+  }
+});
 
 var publicRoutes = FlowRouter.group({
   name: 'public',
@@ -95,25 +101,15 @@ var publicRoutes = FlowRouter.group({
 });
 
 publicRoutes.route('/whosthere', {
-  name: 'whosthere',
+  name: 'whostherepublic',
   action() {
-    if (Meteor.userId()) {
-      BlazeLayout.render('layoutDefault', {header: 'menuDefault', content: 'whosthere'});
-    }
-    else {
-      BlazeLayout.render('layoutPublic', {content: 'whosthere'});
-    }
+    BlazeLayout.render('layoutPublic', {content: 'whosthere'});
   }
 });
 
 publicRoutes.route('/members', {
-  name: 'members',
+  name: 'memberspublic',
   action() {
-    if (Meteor.userId()) {
-      BlazeLayout.render('layoutDefault', {header: 'menuDefault', content: 'members'});
-    }
-    else {
-      BlazeLayout.render('layoutPublic', {content: 'members'});
-    }
+    BlazeLayout.render('layoutPublic', {content: 'members'});
   }
 });
