@@ -15,7 +15,6 @@ tracker@1.1.0                 # Meteor's client-side reactive programming librar
 es5-shim@4.6.14                # ECMAScript 5 compatibility for older browsers.
 ecmascript@0.5.8              # Enable ECMAScript2015+ syntax in app code
 
-useraccounts:semantic-ui
 # flemay:less-autoprefixer
 less@2.7.5
 accounts-github@1.0.10
@@ -28,12 +27,10 @@ http@1.2.9
 accounts-google@1.0.10
 service-configuration@1.0.10
 jparker:gravatar
-vsivsi:job-collection
 app-root
 nimble:restivus
 kadira:blaze-layout
 kadira:flow-router
-useraccounts:flow-routing
 aldeed:collection2
 sacha:spin
 standard-minifier-css
@@ -44,5 +41,5 @@ fortawesome:fontawesome
 aramk:collection-table
 aldeed:tabular
 practicalmeteor:mocha
-iandouglas:accounts-ui-semantic-ui
 semantic:ui-css@=2.1.2
+iandouglas:accounts-ui-semantic-ui
