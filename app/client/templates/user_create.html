@@ -1,5 +1,5 @@
 <template name="user_create">
-  {{#autoForm collection=users id="insertUserForm" type="insert"}}
+  {{#autoForm collection=users id="insertUserForm" type="method" meteormethod="users.insert"}}
     <fieldset>
       <legend>Add a User</legend>
       {{> user_edit}}

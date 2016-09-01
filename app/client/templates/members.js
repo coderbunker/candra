@@ -1,3 +1,6 @@
+Template.members.onCreated(function () {
+    Meteor.subscribe('Meteor.users');
+});
 
 Template.members.helpers({
   members: function () {
@@ -10,5 +13,8 @@ Template.members.helpers({
     }
     chunks.push({row: all});
     return chunks;
+  },
+  membersCount: function() {
+    return Meteor.users.find().count();
   }
 });

@@ -1,5 +1,5 @@
 <template name="user_update">
-  {{#autoForm collection=users doc=user id="updateUserForm" type="update"}}
+  {{#autoForm collection=users doc=user id="updateUserForm" type="method-update" meteormethod="users.update"}}
     <fieldset>
       <legend>Update a User</legend>
       {{> user_edit}}

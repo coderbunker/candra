@@ -76,3 +76,18 @@ Meteor.startup(function () {
     console.log(initOrgs());  
   }
 });
+
+Meteor.publish("Meteor.users", function () {
+    var fields = {
+          'profile.name': 1, 
+          'profile.bio': 1,
+          'profile.title': 1,
+          'profile.image_url': 1,
+    };
+    var findCriteria = {'profile.name': {$exists: true}};
+    if(this.userId) {
+      fields['profile.email'] = 1 ;
+      findCriteria = {};
+    }
+    return Meteor.users.find(findCriteria, {fields: fields});
+});

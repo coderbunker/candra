@@ -37,9 +37,16 @@ meteor run --settings ../secrets/settings/localhost-3000.json
 see .deploy/README.md
 
 
-## Backup
+## Backup & Restore
+
+see scripts backup.sh and restore.sh
+
+## Testing
+
+see: https://guide.meteor.com/testing.html
+
+Running tests:
 
 ```
-mongodump -h 127.0.0.1 --port 3001 -d meteor --collection users --out ../secrets/dump
-mongodump -h 127.0.0.1 --port 3001 -d meteor --collection UserProfile --out ../secrets/dump
+meteor test --driver-package practicalmeteor:mocha --port 3100
 ```

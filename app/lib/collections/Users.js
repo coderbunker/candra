@@ -1,4 +1,4 @@
-App.Schemas.UserProfile = new SimpleSchema({
+var UserProfileSchema = new SimpleSchema({
   name: {
     type: String,
     optional: true
@@ -17,6 +17,7 @@ App.Schemas.UserProfile = new SimpleSchema({
   },
   email: {
     type: String,
+    regEx: SimpleSchema.RegEx.Email,
     optional: false
   },
   address: {
@@ -54,7 +55,7 @@ App.Schemas.UserProfile = new SimpleSchema({
   }
 });
 
-App.Schemas.User = new SimpleSchema({
+var UserSchema = new SimpleSchema({
   username: {
     type: String,
     // For accounts-password, either emails or username is required, but not both. It is OK to make this
@@ -93,7 +94,7 @@ App.Schemas.User = new SimpleSchema({
     }
   },
   profile: {
-    type: App.Schemas.UserProfile,
+    type: UserProfileSchema,
     optional: true
   },
   // Make sure this services field is in your schema if you're using any of the accounts packages
@@ -108,5 +109,10 @@ App.Schemas.User = new SimpleSchema({
     optional: true
   }
 });
+
+export { UserSchema, UserProfileSchema};
+
+App.Schemas.UserProfile = UserProfileSchema;
+App.Schemas.User = UserSchema;
 
 Meteor.users.attachSchema(App.Schemas.User);
