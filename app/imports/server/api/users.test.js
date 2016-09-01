@@ -6,12 +6,20 @@ var assert = chai.assert,
     expect = chai.expect;
 
 const VALID_DOC = {
-      profile: {
-        name: 'Ricky Ng-Adam', 
-        email: 'rngadam@example.com'
-      },
-      createdAt: new Date()
-    };
+  profile: {
+    name: 'Ricky Ng-Adam',
+    email: 'rngadam@example.com'
+  },
+  createdAt: new Date()
+};
+
+const VALID_DOC_MINIMAL = {
+  profile: {
+    email: 'rngadam@example.com'
+  },
+  createdAt: new Date()
+};
+
 
 describe('users', function () {
   it('rejects incorrect insert without email ', function () {
@@ -33,13 +41,11 @@ describe('users', function () {
   });
 
   it('accepts correct insert', function () {
-    Meteor.call('users.insert', {
-      profile: {
-        name: 'Ricky Ng-Adam', 
-        email: 'rngadam@example.com'
-      },
-      createdAt: new Date()
-    });
+    Meteor.call('users.insert', VALID_DOC);
+  });
+
+  it('accepts correct insert even without name', function () {
+    Meteor.call('users.insert', VALID_DOC_MINIMAL);
   });
 
   it('does not accept removing createdAt in update', function() {
