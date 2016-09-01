@@ -20,36 +20,37 @@ function initOrgs() {
   var urls = Object.keys(directory.data).map(function (k) {
 
     if (!App.Collections.Orgs.findOne({space: k})) {
-      console.log(k);
       // Execute http calls asynchronously so we don't block execution for client inbound client request
       // Meteor.defer = Meteor.setTimeout(x, 0)
       var url = directory.data[k];
 
       Meteor.defer(function () {
-        try {
-          console.log('fetching ' + url);
+        try {      
+          var orgLog = {succes: true};
+          orgLog.url = url;
           var result = Meteor.http.call("GET", url);
 
           var data;
           try {
             data = JSON.parse(result.content);
+            orgLog.data = data;
           } catch(e) {
-            data = result.data;
+            orgLog.succes = false;
+            orgLog.error = e;
           }
 
-          if (!data) {
-            console.log("No data found or invalid response for: " + url);
-            return;
+          if(data) {
+            App.Collections.Orgs.upsert({space: k}, {
+              space: k,
+              data: data
+            });
           }
-          App.Collections.Orgs.upsert({space: k}, {
-            space: k,
-            data: data
-          });
         } catch (e) {
-          console.log("Error getting data for: " + url);
-          console.log(e);
+          orgLog.succes = false;
+          orgLog.error = e;
         }
-
+        
+        App.Collections.OrgLogs.insert(orgLog);
       });
       return url;
     } else {
@@ -73,7 +74,7 @@ Meteor.startup(function () {
     oauthConfig('google', config.google.clientId, config.google.secret);
   }
   if(Meteor.settings.spaceapienabled) {
-    console.log(initOrgs());  
+    initOrgs();  
   }
 });
 

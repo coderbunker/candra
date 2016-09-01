@@ -1,0 +1,1 @@
+App.Collections.OrgLogs = new Mongo.Collection('orgLogs');
