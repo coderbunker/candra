@@ -18,7 +18,6 @@ ecmascript@0.5.8              # Enable ECMAScript2015+ syntax in app code
 useraccounts:semantic-ui
 # flemay:less-autoprefixer
 less@2.7.5
-semantic:ui-css
 accounts-github@1.0.10
 momentjs:moment
 reactive-var@1.0.10
@@ -28,7 +27,6 @@ fabienb4:autoform-semantic-ui
 http@1.2.9
 accounts-google@1.0.10
 service-configuration@1.0.10
-iandouglas:accounts-ui-semantic-ui
 jparker:gravatar
 vsivsi:job-collection
 app-root
@@ -45,3 +43,6 @@ aslagle:reactive-table
 fortawesome:fontawesome
 aramk:collection-table
 aldeed:tabular
+practicalmeteor:mocha
+iandouglas:accounts-ui-semantic-ui
+semantic:ui-css@=2.1.2
