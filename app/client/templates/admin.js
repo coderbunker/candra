@@ -1,8 +1,9 @@
 Template.admin.onCreated(function () {
     Meteor.subscribe('Meteor.users');
+    this.currentTab = new ReactiveVar('admin_users');
 });
 
-Template.admin.events({
+Template.admin_controls.events({
     'click #flushdb': function() {
       console.log('flushing db');
       Meteor.call('admin/flushdb');
@@ -10,6 +11,12 @@ Template.admin.events({
 });
 
 Template.admin.helpers({
+  tab: function () {
+      return Template.instance().currentTab.get();
+    }
+});
+
+Template.admin_users.helpers({
   settings: function () {
           return {
               onCreate: function() {
@@ -37,3 +44,15 @@ Template.admin.helpers({
           };
   }
 });
+
+Template.admin.events({
+   'click .usersButton': function( event, template ) {
+    template.currentTab.set('admin_users');
+  },
+  'click .controlsButton': function( event, template ) {
+    template.currentTab.set('admin_controls');
+  },
+  'click .organisationsButton': function( event, template ) {
+    template.currentTab.set('admin_organisations');
+  }
+})
