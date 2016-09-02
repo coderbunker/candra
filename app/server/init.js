@@ -18,7 +18,6 @@ function oauthConfig(service, clientId, secret) {
 function initOrgs() {
   var directory = Meteor.http.call("GET", "http://spaceapi.net/directory.json?api=0.13");
   var urls = Object.keys(directory.data).map(function (k) {
-
     if (!App.Collections.Orgs.findOne({space: k})) {
       // Execute http calls asynchronously so we don't block execution for client inbound client request
       // Meteor.defer = Meteor.setTimeout(x, 0)
@@ -49,7 +48,6 @@ function initOrgs() {
           orgLog.succes = false;
           orgLog.error = e;
         }
-        
         App.Collections.OrgLogs.insert(orgLog);
       });
       return url;
@@ -91,4 +89,8 @@ Meteor.publish("Meteor.users", function () {
       findCriteria = {};
     }
     return Meteor.users.find(findCriteria, {fields: fields});
+});
+
+Meteor.publish("Meteor.orgLogs", function () {
+  return App.Collections.OrgLogs.find({});
 });

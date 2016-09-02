@@ -30,5 +30,11 @@
 </template>
 
 <template name="admin_organisations">
-	ORGANISATIONS
+	<div class="ui raised segment">
+        <div class="ui list">
+            {{#each orgLog in orgLogs}}
+               <li>{{orgLog}}</li>
+            {{/each}}
+        </div>
+    </div>
 </template>

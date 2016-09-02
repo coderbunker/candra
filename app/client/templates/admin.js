@@ -3,6 +3,10 @@ Template.admin.onCreated(function () {
     this.currentTab = new ReactiveVar('admin_users');
 });
 
+Template.admin_organisations.onCreated(function () {
+    Meteor.subscribe('Meteor.orgLogs');
+});
+
 Template.admin_controls.events({
     'click #flushdb': function() {
       console.log('flushing db');
@@ -44,6 +48,14 @@ Template.admin_users.helpers({
           };
   }
 });
+
+Template.admin_organisations.helpers({
+  orgLogs: function() {
+    console.log('found');
+    console.log(App.Collections.OrgLogs.find({}).fetch());
+    return App.Collections.OrgLogs.find({}).fetch();
+  }
+})
 
 Template.admin.events({
    'click .usersButton': function( event, template ) {
