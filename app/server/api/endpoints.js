@@ -5,7 +5,11 @@ RouterApi = new Restivus({
 
 RouterApi.addRoute(
   'arp/:name',
-  {authRequired: false},
+  {
+    authRequired: false, 
+    prettyJson: true,
+    defaultHeaders: { 'Content-Type': 'application/json' }
+  },
   {
     post() {
 
@@ -15,40 +19,71 @@ RouterApi.addRoute(
       var response = this.response;
       var key, arpTable, headers = request.headers;
       var routers = App.routers;
-      var router = _.findWhere(routers, {name: this.params.name});
+      var router = _.findWhere(routers, {name: this.urlParams.name});
 
       if (!router) {
-        response.end(JSON.stringify({success: false, message: 'this router does not exist in configuration'}));
-        return;
+        return {
+          statusCode: 404,
+          body: {
+            success: false, 
+            message: 'this router does not exist in configuration'
+          }
+        };
       }
 
       if (!headers.authorization) {
-        response.end(JSON.stringify({success: false, message: 'authorization token missing'}));
-        return;
+        return {
+          statusCode: 401,
+          body: {
+            success: false, 
+            message: 'authorization token missing'            
+          }
+        };
       }
 
-      key = headers.authorization.substring(7);
+      var key = headers.authorization.substring(7);
 
       if (key !== router.key) {
-        response.end(JSON.stringify({success: false, message: 'wrong authorization key'}));
-        return;
+        return {
+          statusCode: 401,
+          body: {
+            success: false, 
+            message: 'wrong authorization key'            
+          }
+        };
       }
 
-      APICalls.upsert({api: 'arp'}, {api: 'arp', time: new Date(), clientIP: request.headers['x-forwarded-for']});
+      if(!request.body.arpTable) {
+        return {
+          statusCode: 400,
+          body: {
+            success: false, 
+            message: 'invalid request, missing arpTable'            
+          }
+        };        
+      }
 
-      arpTable = request.body.arpTable;
+      APICalls.upsert({api: 'arp'}, {
+        api: 'arp', 
+        time: new Date(), 
+        clientIP: request.headers['x-forwarded-for']
+      });
+
+      var arpTable = request.body.arpTable;
 
       var rows = arpTable.split("\n");
       var entries = [];
 
       rows.forEach((row, index) => {
-        if (index === 0) return;
+        if (index === 0) 
+          return;
         var values;
         row = row.replace(/ +(?= )/g, '');
         values = row.split(" ");
 
         // Prevents empty rows from causing errors
-        if (_.isEmpty(values) || values.length !== 6) return;
+        if (_.isEmpty(values) || values.length !== 6) 
+          return;
 
         entries.push({
           updatedAt: new Date(),
@@ -106,7 +141,7 @@ RouterApi.addRoute(
 
       APICalls.update({api: 'arp'}, {$set: {success: true}});
 
-      response.end(JSON.stringify({success: true, message: 'successfully retrieved data'}));
+      return { success: true, message: 'successfully retrieved data' };
 
     }
   }
@@ -119,11 +154,14 @@ SpaceApi = new Restivus({
 
 SpaceApi.addRoute(
   'status',
-  {authRequired: false},
+  {
+    authRequired: false,
+    prettyJson: true
+  },
   {
     get () {
       this.response.setHeader('Content-Type', 'application/json');
-      this.response.end(JSON.stringify(Meteor.settings.public.spaceapi, null, 4));
+      this.response.end(Meteor.settings.public.spaceapi);
     }
   }
 );
