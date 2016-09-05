@@ -1,57 +1,73 @@
 <template name="admin">
-	<div class="top ui container">
+    <div class="top ui container">
         <div class="ui secondary pointing menu">
-			<a class="usersButton item" href="#" >
+            <a class="usersButton item" href="#">
 			    Users
 			</a>
-			<a class="controlsButton item" href="#">
+            <a class="controlsButton item" href="#">
 			    Controls
 			</a>
-			<a class="organisationsButton item" href="#">
+            <a class="organisationsButton item" href="#">
 			    Organisations
 			</a>
         </div>
     </div>
-	{{> Template.dynamic template=tab}}
+    {{> Template.dynamic template=tab}}
 </template>
-
 <template name="userPhoto">
-  <img class="ui small image" src="{{profilePictureUrl size=300}}">
+    <img class="ui small image" src="{{profilePictureUrl size=300}}">
 </template>
-
 <template name="admin_users">
-	{{> collectionTable collection=users class="table table-bordered table-hover" settings=settings }}
+    {{> collectionTable collection=users class="table table-bordered table-hover" settings=settings }}
 </template>
-
 <template name="admin_controls">
-	<div class="ui item">
-    <a class="ui button" id="flushdb" href="#">FlushDB</a>
-  </div>
+    <div class="ui item">
+        <a class="ui button" id="flushdb" href="#">FlushDB</a>
+    </div>
 </template>
-
 <template name="admin_organisations">
-	<div class="ui raised segment">
+    <div class="ui raised segment">
         <table class="ui celled padded table">
-        	<thead>
-		    	<tr>
-				    <th>Success</th>
-				    <th>Url</th>
-				    <th>Last Success</th>
-				    <th>Error</th>
-		  		</tr>
-			</thead>
-			<tbody>
-				{{#each orgLog in orgLogs}}
-					<tr class="{{#unless orgLog.success}} warning {{/unless}}">
-						<td> 
-							<i class = "{{#if orgLog.success}} big green checkmark icon {{else}} big red minus icon {{/if}}" ></i>
-						</td>
-						<td> {{orgLog.url}} </td>
-						<td > {{orgLog.lastSuccess}} </td>
-						<td class="{{#unless orgLog.success}} errorButton {{/unless}}"> {{#unless orgLog.success}} Show Error {{/unless}}</td>
-					</tr>
-				{{/each}}
-			</tbody>
+            <thead>
+                <tr>
+                    <th>Success</th>
+                    <th>Url</th>
+                    <th>Last Success</th>
+                    <th>Error</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each orgLog in orgLogs}}
+                <tr class="{{#unless isSucces orgLog.statusCode}} warning {{/unless}}">
+                    <td>
+                        {{#if isSucces orgLog.statusCode}}
+                        <div class="ui label">
+                            <i class="big green checkmark icon"></i> {{orgLog.statusCode}}
+                        </div>
+                        {{else}}
+                        <div class="ui label">
+                            <i class="big red minus icon"></i> {{orgLog.statusCode}}
+                        </div>
+                        {{/if}}
+                    </td>
+                    <td> {{orgLog.url}} </td>
+                    <td> {{orgLog.lastSuccess}} </td>
+                    <td> {{#unless isSucces orgLog.statusCode}} {{> openError orgLog=orgLog}} {{/unless}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
         </table>
+    </div>
+</template>
+<template name="openError">
+    <button id="openModal" class="ui button"> SHOW ERROR </button>
+    <div id="errorModal" class="ui modal">
+    	<div class="header">Error:</div>
+  		<div class="content">
+        	{{orgLog.errorMessage}}
+        </div>
+        <div class="actions">
+            <div id="closeModal" class="ui button cancel">Close</div>
+        </div>
     </div>
 </template>
