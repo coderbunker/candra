@@ -58,7 +58,7 @@ Template.admin_organisations.helpers({
 })
 
 Template.admin.events({
-   'click .usersButton': function( event, template ) {
+  'click .usersButton': function( event, template ) {
     template.currentTab.set('admin_users');
   },
   'click .controlsButton': function( event, template ) {
@@ -66,5 +66,11 @@ Template.admin.events({
   },
   'click .organisationsButton': function( event, template ) {
     template.currentTab.set('admin_organisations');
+  }
+})
+
+Template.admin_organisations.events({
+  'click .errorButton': function(){
+    console.log("clicked the button");
   }
 })

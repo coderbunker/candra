@@ -25,8 +25,9 @@ function initOrgs() {
 
       Meteor.defer(function () {
         try {      
-          var orgLog = {succes: true};
+          var orgLog = {success: true};
           orgLog.url = url;
+          orgLog.error = 'N/A';
           var result = Meteor.http.call("GET", url);
 
           var data;
@@ -34,19 +35,22 @@ function initOrgs() {
             data = JSON.parse(result.content);
             orgLog.data = data;
           } catch(e) {
-            orgLog.succes = false;
+            orgLog.success = false;
             orgLog.error = e;
           }
 
           if(data) {
-            App.Collections.Orgs.upsert({space: k}, {
+            /*App.Collections.Orgs.upsert({space: k}, {
               space: k,
               data: data
-            });
+            });*/
           }
         } catch (e) {
-          orgLog.succes = false;
+          orgLog.success = false;
           orgLog.error = e;
+        }
+        if(orgLog.success){
+          orgLog.lastSuccess = new Date();
         }
         App.Collections.OrgLogs.insert(orgLog);
       });

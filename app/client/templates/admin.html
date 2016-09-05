@@ -31,10 +31,27 @@
 
 <template name="admin_organisations">
 	<div class="ui raised segment">
-        <div class="ui list">
-            {{#each orgLog in orgLogs}}
-               <li>{{orgLog}}</li>
-            {{/each}}
-        </div>
+        <table class="ui celled padded table">
+        	<thead>
+		    	<tr>
+				    <th>Success</th>
+				    <th>Url</th>
+				    <th>Last Success</th>
+				    <th>Error</th>
+		  		</tr>
+			</thead>
+			<tbody>
+				{{#each orgLog in orgLogs}}
+					<tr class="{{#unless orgLog.success}} warning {{/unless}}">
+						<td> 
+							<i class = "{{#if orgLog.success}} big green checkmark icon {{else}} big red minus icon {{/if}}" ></i>
+						</td>
+						<td> {{orgLog.url}} </td>
+						<td > {{orgLog.lastSuccess}} </td>
+						<td class="{{#unless orgLog.success}} errorButton {{/unless}}"> {{#unless orgLog.success}} Show Error {{/unless}}</td>
+					</tr>
+				{{/each}}
+			</tbody>
+        </table>
     </div>
 </template>
