@@ -29,8 +29,9 @@ function initOrgs() {
                     orgLog.data = JSON.parse(result.content);
 
                 } catch (e) {
-                    orgLog.statusCode = e.response.statusCode;
-                    console.log('errorMessage:\n' + e);
+                    if(e.response){
+                        orgLog.statusCode = e.response.statusCode;
+                    }
                     orgLog.errorMessage = JSON.stringify(e, null, '\t');
                 }
                 if (orgLog.statusCode == 200) {

@@ -74,6 +74,13 @@ FlowRouter.route('/admin', {
   }
 });
 
+FlowRouter.route('/error/:_id', {
+  name: 'error_view',
+  action() {
+    BlazeLayout.render('layoutDefault', {header: 'menuDefault', content: 'error_view'});
+  }
+});
+
 FlowRouter.route('/users/create', {
   name: 'create',
   action() {

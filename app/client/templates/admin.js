@@ -7,9 +7,11 @@ Template.admin_organisations.onCreated(function() {
     Meteor.subscribe('Meteor.orgLogs');
 });
 
-Template.openError.onCreated(function() {
-    Meteor.subscribe('Meteor.orgLogs');
-});
+Template.admin_organisations.events({
+    'click #errorButton' : function(event){
+        FlowRouter.go('/error/' + event.target.value);
+    }
+})
 
 Template.admin_controls.events({
     'click #flushdb': function() {
@@ -68,11 +70,5 @@ Template.admin.events({
     },
     'click .organisationsButton': function(event, template) {
         template.currentTab.set('admin_organisations');
-    }
-})
-
-Template.admin_organisations.events({
-    'click #openModal': function(error) {
-        $('#errorModal').modal('show');
     }
 })
