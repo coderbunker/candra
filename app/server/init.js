@@ -16,31 +16,40 @@ function initOrgs() {
     var directory = Meteor.http.call("GET", "http://spaceapi.net/directory.json?api=0.13");
     var urls = Object.keys(directory.data).map(function(k) {
         if (!App.Collections.Orgs.findOne({ space: k })) {
-            // Execute http calls asynchronously so we don't block execution for client inbound client request
-            // Meteor.defer = Meteor.setTimeout(x, 0)
-            var url = directory.data[k];
 
             Meteor.defer(function() {
-                try {
-                    var orgLog = { statusCode: 200 };
-                    orgLog.url = url;
-                    orgLog.errorMessage = "N/A";
-                    var result = Meteor.http.call("GET", url);
-                    orgLog.data = JSON.parse(result.content);
+                // Execute http calls asynchronously so we don't block execution for client inbound client request
+                // Meteor.defer = Meteor.setTimeout(x, 0)
+                var url = directory.data[k];
 
+                var newLog = { 'statusCode': 200, 'url': url, 'data': {}, 'errorMessage': undefined, 'lastSuccess': undefined };
+                try {
+                    var result = Meteor.http.call("GET", url);
+                    newLog.data = JSON.parse(result.content);
+                    newLog.lastSuccess = new Date();
                 } catch (e) {
-                    if(e.response){
-                        orgLog.statusCode = e.response.statusCode;
+                    if (e.response) {
+                        newLog.statusCode = e.response.statusCode;
+                    } else {
+                        newLog.statusCode = undefined;
                     }
-                    orgLog.errorMessage = JSON.stringify(e, null, '\t');
+                    newLog.errorMessage = JSON.stringify(e, null, '\t');
                 }
-                if (orgLog.statusCode == 200) {
-                    orgLog.errorMessage = 'N/A';
-                    orgLog.lastSuccess = new Date();
+
+                var oldLog = App.Collections.OrgLogs.findOne({ 'url': url });
+
+                if (!oldLog) {
+                    App.Collections.OrgLogs.insert(newLog);
+                } else {
+                    var toUpdate = { 'statusCode': newLog.statusCode, 'errorMessage': newLog.errorMessage };
+                    if(newLog.statusCode == 200){
+                        toUpdate.lastSuccess = new Date();
+                    }
+                    App.Collections.OrgLogs.update({ 'url': url }, { $set: toUpdate });
                 }
-                App.Collections.OrgLogs.insert(orgLog);
+
+                return url;
             });
-            return url;
         } else {
             return '';
         }
