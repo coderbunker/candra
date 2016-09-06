@@ -63,10 +63,11 @@ RouterApi.addRoute(
         };        
       }
 
-      APICalls.upsert({api: 'arp'}, {
-        api: 'arp', 
-        time: new Date(), 
-        clientIP: request.headers['x-forwarded-for']
+      APICalls.upsert({api: 'arp'}, { $set: {
+          api: 'arp', 
+          time: new Date(), 
+          clientIP: request.headers['x-forwarded-for']        
+        }
       });
 
       var arpTable = request.body.arpTable;
