@@ -33,7 +33,7 @@ function initOrgs() {
                     } else {
                         newLog.statusCode = undefined;
                     }
-                    newLog.errorMessage = JSON.stringify(e, null, '\t');
+                    newLog.errorMessage = e;
                 }
 
                 var oldLog = App.Collections.OrgLogs.findOne({ 'url': url });

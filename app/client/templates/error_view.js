@@ -3,7 +3,8 @@ Template.error_view.onCreated(function() {
 });
 
 Template.error_view.helpers({
-	'getError' : function(){
-		return JSON.stringify(App.Collections.OrgLogs.findOne(FlowRouter.getParam('_id')),null, '\t');
+	'getError' : function() {
+    console.log(App.Collections.OrgLogs.findOne(FlowRouter.getParam('_id')));
+		return JSON.stringify(App.Collections.OrgLogs.findOne(FlowRouter.getParam('_id')), null, '\t');
 	}
 })
