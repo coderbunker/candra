@@ -25,41 +25,23 @@
         <a class="ui button" id="flushdb" href="#">FlushDB</a>
     </div>
 </template>
+
+<template name="admin_error_button">
+    <button id="errorButton" class="button item" value={{orgLog._id}}>Show Error</button>
+</template>
+
+<template name="admin_success_status">
+    {{#if isSuccess orgLog.statusCode}}
+    <div class="ui label">
+        <i class="big green checkmark icon"></i> {{orgLog.statusCode}}
+    </div>
+    {{else}}
+    <div class="ui label">
+        <i class="big red minus icon"></i> {{orgLog.statusCode}}
+    </div>
+    {{/if}}
+</template>
+
 <template name="admin_organisations">
-    <div class="ui raised segment">
-        <table class="ui fixed celled padded table">
-            <thead>
-                <tr>
-                    <th class="fixed">Success</th>
-                    <th>Url</th>
-                    <th>Last Success</th>
-                    <th>Error</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each orgLog in orgLogs}}
-                <tr class="{{#unless isSucces orgLog.statusCode}} warning {{/unless}}">
-                    <td>
-                        {{#if isSucces orgLog.statusCode}}
-                        <div class="ui label">
-                            <i class="big green checkmark icon"></i> {{orgLog.statusCode}}
-                        </div>
-                        {{else}}
-                        <div class="ui label">
-                            <i class="big red minus icon"></i> {{orgLog.statusCode}}
-                        </div>
-                        {{/if}}
-                    </td>
-                    <td> {{orgLog.url}} </td>
-                    <td> {{orgLog.lastSuccess}} </td>
-                    <td>
-                        {{#unless isSucces orgLog.statusCode}}
-                            <button id="errorButton" class="button item" value={{orgLog._id}}>Show Error</button>
-                        {{/unless}}
-                    </td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
-        </div>
+    {{> collectionTable collection=orgLogs class="table table-bordered table-hover" settings=settings }}
 </template>

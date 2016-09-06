@@ -56,6 +56,27 @@ Template.admin_users.helpers({
 });
 
 Template.admin_organisations.helpers({
+    isSuccess: function(statusCode) {
+        return 200 == statusCode;
+    },
+
+    settings: function() {
+        return {
+            onDelete: function(params) {
+                Meteor.call('users.remove', params.ids);
+            },
+            collection: App.Collections.orgLogs,
+            rowsPerPage: 10,
+            showFilter: true,
+            fields: [
+                { key: 'orgLog.statusCode', label: 'Success', tmpl: Template.admin_success_status },
+                { key: 'orgLog.lastSuccess', label: 'Last success' },
+                { key: 'orgLog.url', label: 'URL' },
+                { key: 'orgLog.statusCode', label: 'status code' },
+                { key: 'orgLog.error', label: 'Error', tmpl: Template.error_view },
+            ]
+        };
+    },
     orgLogs: function() {
         return App.Collections.OrgLogs.find({}).fetch();
     }

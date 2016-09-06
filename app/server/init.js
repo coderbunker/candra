@@ -22,7 +22,14 @@ function initOrgs() {
                 // Meteor.defer = Meteor.setTimeout(x, 0)
                 var url = directory.data[k];
 
-                var newLog = { 'statusCode': 200, 'url': url, 'data': {}, 'errorMessage': undefined, 'lastSuccess': undefined };
+                var newLog = { 
+                    'statusCode': 200, 
+                    'url': url, 
+                    'data': null, 
+                    'errorMessage': {}, 
+                    'lastSuccess': null 
+                };
+
                 try {
                     var result = Meteor.http.call("GET", url);
                     newLog.data = JSON.parse(result.content);
@@ -41,7 +48,13 @@ function initOrgs() {
                 if (!oldLog) {
                     App.Collections.OrgLogs.insert(newLog);
                 } else {
-                    var toUpdate = { 'statusCode': newLog.statusCode, 'errorMessage': newLog.errorMessage };
+                    var toUpdate = { 
+                        'statusCode': newLog.statusCode, 
+                        'errorMessage': newLog.errorMessage
+                    };
+                    if(newLog.data instanceof Object) {
+                        toUpdate.data = newLog.data;
+                    }
                     if(newLog.statusCode == 200){
                         toUpdate.lastSuccess = new Date();
                     }
