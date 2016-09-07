@@ -82,7 +82,7 @@ RouterApi.addRoute(
                     statusCode: 400,
                     body: {
                         success: false,
-                        message: 'invalid request, missing arpTable body: \n ' + JSON.stringify(request.body)
+                        message: 'invalid request, missing arpTable'
                     }
                 };
             }
