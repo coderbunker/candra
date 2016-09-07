@@ -4,8 +4,10 @@ import { chai } from 'meteor/practicalmeteor:chai';
 var assert = chai.assert,
     expect = chai.expect;
 
+const NoEntries = 'IP address       HW type     Flags       HW address            Mask     Device';
 const ThreeEntries = 'IP address       HW type     Flags       HW address            Mask     Device\r\n192.168.1.11     0x1         0x2         8c:3a:e3:93:83:93     *        br0\r\n192.168.1.50     0x1         0x2         00:26:bb:07:54:80     *        br0\r\n192.168.1.18     0x1         0x2         3c:15:c2:cc:dc:2a     *        br0';
 const TwoEntries = 'IP address       HW type     Flags       HW address            Mask     Device\r\n192.168.1.11     0x1         0x2         8c:3a:e3:93:83:93     *        br0\r\n192.168.1.50     0x1         0x2         00:26:bb:07:54:80     *        br0';
+
 describe('API', function() {
 
     it('accepts correct call', function() {
@@ -78,24 +80,15 @@ describe('API', function() {
     });
 
     it('removes old MAC addresses', function() {
-      var entriesBefore;
         HTTP.call(
             'POST',
-            Meteor.absoluteUrl() + 'routerapi/v1/arp/candra', { headers: { 'Authorization': 'Bearer abcd' }, data: { arpTable: ThreeEntries } },
-            function(error, result) {
-                assert(!error, 'there was an error: \n' + error);
-                assert(result.statusCode == 200, 'Status code didn\'t match 200 it was ' + result.statusCode);
-                entriesBefore = App.Collections.ARPEntries.find().count();
-            }
+            Meteor.absoluteUrl() + 'routerapi/v1/arp/candra', { headers: { 'Authorization': 'Bearer abcd' }, data: { arpTable: ThreeEntries } }
         );
-        HTTP.call(
+        var entriesBefore = App.Collections.ARPEntries.find().count();
+        result = HTTP.call(
             'POST',
-            Meteor.absoluteUrl() + 'routerapi/v1/arp/candra', { headers: { 'Authorization': 'Bearer abcd' }, data: { arpTable: TwoEntries } },
-            function(error, result) {
-                assert(!error, 'there was an error: \n' + error);
-                assert(result.statusCode == 200, 'Status code didn\'t match 200 it was ' + result.statusCode);
-                assert(App.Collections.ARPEntries.find().count() == entriesBefore - 1, 'An entry was not removed correctly');
-            }
+            Meteor.absoluteUrl() + 'routerapi/v1/arp/candra', { headers: { 'Authorization': 'Bearer abcd' }, data: { arpTable: TwoEntries } }
         );
+        assert.equal(App.Collections.ARPEntries.find().count(), entriesBefore - 1);
     });
 });
