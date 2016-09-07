@@ -7,28 +7,53 @@ ARPEntries = App.Collections.ARPEntries;
 APICalls = App.Collections.APICalls;
 
 var getEntries = function(arpTable) {
+
     console.log('processing arp table \n' + arpTable);
+
     entries = [];
     var rows = arpTable.split("\n");
+
     rows.forEach((row, index) => {
         if (index === 0)
             return;
         var values;
+        //remove double spaces
         row = row.replace(/ +(?= )/g, '');
         values = row.split(" ");
 
-        // Prevents empty rows from causing errors
-        if (_.isEmpty(values) || values.length !== 6)
-            return;
+        var IP;
+        var MAC;
 
-        entries.push({
-            updatedAt: new Date(),
-            IP: values[0],
-            MAC: values[3].toUpperCase()
-        });
+        //test if the field is an IP or MAC
+        values.forEach((field) => {
+            if (!IP && isIP(field)) {
+                IP = field;
+            } else if (!MAC && isMAC(field)) {
+                MAC = field.toUpperCase();
+            }
+        })
+
+        //if both fields are found in the row push.
+        if (IP && MAC) {
+            entries.push({
+                updatedAt: new Date(),
+                IP: values[0],
+                MAC: values[3].toUpperCase()
+            });
+        }
+
     });
+
     return entries;
 };
+
+var isIP = function(field){
+	return true;
+}
+
+var isMAC = function(field){
+	return new RegExp("^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$").test(field);
+}
 
 var clearExpiredEntries = function(entries) {
     // The user is not connected to the router anymore
@@ -183,4 +208,4 @@ SpaceApi.addRoute(
     }
 );
 
-export { getEntries, clearExpiredEntries, associateEntry};
+export { getEntries, clearExpiredEntries, associateEntry, isIP, isMAC };
