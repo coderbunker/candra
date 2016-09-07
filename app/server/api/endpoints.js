@@ -13,8 +13,6 @@ RouterApi.addRoute(
   {
     post() {
 
-      console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-
       var ARPEntries = App.Collections.ARPEntries;
       var APICalls = App.Collections.APICalls;
       var request = this.request;
@@ -22,8 +20,6 @@ RouterApi.addRoute(
       var key, arpTable, headers = request.headers;
       var routers = App.routers;
       var router = _.findWhere(routers, {name: this.urlParams.name});
-
-      console.log('routers: ' + App.routers);
 
       if (!router) {
         return {
