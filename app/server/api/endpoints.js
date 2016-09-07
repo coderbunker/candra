@@ -1,4 +1,6 @@
 import { isMAC, isIP } from '../regexes.js';
+import '../../lib/collections/ARPEntries.js';
+import '../../lib/collections/APICalls.js';
 
 RouterApi = new Restivus({
     apiPath: 'routerapi/',
