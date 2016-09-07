@@ -1,15 +1,20 @@
 var OrgLogsSchema = new SimpleSchema({
+  timestamp: {
+    type: Date,
+    optional: false
+  },
+  url: {
+    type: String,
+    optional: false
+  },
   statusCode: {
     type: Number,
     optional: true
   },
-  url: {
-    type: String,
-    optional: true
-  },
   error: {
     type: Object,
-    optional: true
+    optional: true,
+    blackbox: true
   },
   lastSuccess: {
     type: Date,
@@ -20,10 +25,10 @@ var OrgLogsSchema = new SimpleSchema({
     optional: true,
     blackbox: true
   },
-  errorMessage: {
-    type: Object,
+  successCount: {
+    type: Number,
     optional: true,
-    blackbox: true
+    defaultValue: 0
   },
   failureCount: {
     type: Number,
@@ -40,7 +45,8 @@ function createNewSuccessLog(url, data) {
     statusCode: 200, 
     url: url, 
     data: data, 
-    errorMessage: null, 
+    error: null, 
+    timestamp: new Date(),
     lastSuccess: new Date()
   };
 }
@@ -51,18 +57,22 @@ function createNewErrorLog(url, e) {
       statusCode = e.response.statusCode;
   } 
   return { 
+    timestamp: new Date(),
     statusCode: statusCode, 
     url: url, 
     data: null, 
     // clone to plain object to get rid of tricky native properties
-    errorMessage: JSON.parse(JSON.stringify(e)), 
-    lastSuccess: null 
+    error: JSON.parse(JSON.stringify(e))
   };
 }
 
 function createOrUpdateLog(newLog) {
   OrgLogs.upsert({ url: newLog.url }, {$set: newLog});
-  OrgLogs.update({url: newLog.url }, {$inc: {failureCount: 1}});
+  if(newLog.error) {
+    OrgLogs.update({url: newLog.url }, {$inc: {failureCount: 1}});
+  } else {
+    OrgLogs.update({url: newLog.url }, {$inc: {successCount: 1}});
+  }
 }
 
 App.Collections.OrgLogs = OrgLogs;

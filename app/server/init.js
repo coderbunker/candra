@@ -18,8 +18,8 @@ function initOrgs() {
     var directory = Meteor.http.call("GET", "http://spaceapi.net/directory.json?api=0.13");
     var urls = Object.keys(directory.data).map(function(k) {
         if (!App.Collections.Orgs.findOne({ space: k })) {
+            var url = directory.data[k];
             Meteor.defer(function() {
-                var url = directory.data[k];
                 var newLog;
                 try {
                     var result = Meteor.http.call("GET", url);
