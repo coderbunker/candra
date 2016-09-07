@@ -8,8 +8,6 @@ APICalls = App.Collections.APICalls;
 
 var getEntries = function(arpTable) {
 
-    console.log('processing arp table \n' + arpTable);
-
     entries = [];
     var rows = arpTable.split("\n");
 
@@ -28,17 +26,20 @@ var getEntries = function(arpTable) {
         values.forEach((field) => {
             if (!IP && isIP(field)) {
                 IP = field;
-            } else if (!MAC && isMAC(field)) {
-                MAC = field.toUpperCase();
+            } else if (!MAC) {
+                field = field.toUpperCase();
+                if (isMAC(field)) {
+                    MAC = field;
+                }
             }
         })
 
         //if both fields are found in the row push.
         if (IP && MAC) {
             entries.push({
-                updatedAt: new Date(),
-                IP: values[0],
-                MAC: values[3].toUpperCase()
+                'updatedAt': new Date(),
+                'IP': IP,
+                'MAC': MAC
             });
         }
 
@@ -47,14 +48,12 @@ var getEntries = function(arpTable) {
     return entries;
 };
 
-var isIP = function(field){
-	var result = new RegExp("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$").test(field);
-	console.log(field + " : " + result);
-	return result;
+var isIP = function(field) {
+    return new RegExp("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$").test(field);
 }
 
-var isMAC = function(field){
-	return new RegExp("^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$").test(field);
+var isMAC = function(field) {
+    return new RegExp("^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$").test(field);
 }
 
 var clearExpiredEntries = function(entries) {
@@ -171,18 +170,8 @@ RouterApi.addRoute(
                 }
             });
 
-            var arpTable = request.body.arpTable;
-            console.log(arpTable);
-
-            var entries = getEntries(arpTable);
-            console.log(entries);
-
-
             entries.forEach((entry) => {
-
                 associateEntry(entry);
-
-
             });
 
             clearExpiredEntries(entries);
