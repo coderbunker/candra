@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { chai } from 'meteor/practicalmeteor:chai';
-import { getEntries } from '../../../server/api/endpoints.js';
+import { getEntries } from '../../../server/api/arpTable.js';
 
 var assert = chai.assert,
   expect = chai.expect;

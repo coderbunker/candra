@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { chai } from 'meteor/practicalmeteor:chai';
-import { clearExpiredEntries } from '../../../server/api/endpoints.js';
+import { clearExpiredEntries } from '../../../server/api/arpTable.js';
 import '../../../lib/collections/ARPEntries.js';
 
 var assert = chai.assert,
