@@ -19,7 +19,7 @@ const processedThreeEntries = [{
     MAC: '3C:15:C2:CC:DC:2A'
 }];
 
-describe('regex', function() {
+describe('MAC regex', function() {
     it('accepts dash notation MAC', function() {
         assert(isMAC('00-26-BB-07-54-80'));
     });
@@ -44,6 +44,12 @@ describe('regex', function() {
         assert(!isMAC(''));
     });
 
+    it('rejects MAC without separation', function() {
+        assert(!isMAC('0026BB075480'));
+    });
+});
+
+describe('IP regex', function() {
     it('accepts correct IP', function() {
         assert(isIP('192.168.1.50'));
     });
@@ -72,12 +78,16 @@ describe('regex', function() {
         assert(!isIP('192-168-1-50'));
     });
 
+    it('rejects IP with no separation', function() {
+        assert(!isIP('192168150'));
+    });
+
     it('rejects empty IP', function() {
         assert(!isIP(''));
     });
 });
 
-describe('users', function() {
+describe('arpTable', function() {
     it('processes correct arpTables', function() {
         var result = getEntries(ThreeEntries);
         for (var i = result.length - 1; i >= 0; i--) {

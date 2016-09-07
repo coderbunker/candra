@@ -48,11 +48,13 @@ var getEntries = function(arpTable) {
 };
 
 var isIP = function(field){
-	return true;
+	var result = new RegExp("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$").test(field);
+	console.log(field + " : " + result);
+	return result;
 }
 
 var isMAC = function(field){
-	return new RegExp("^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$").test(field);
+	return new RegExp("^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$").test(field);
 }
 
 var clearExpiredEntries = function(entries) {
