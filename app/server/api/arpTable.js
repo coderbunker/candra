@@ -63,36 +63,38 @@ var clearExpiredEntries = function(entries) {
 }
 
 var associateEntry = function(entry) {
-  var ARPEntry = ARPEntries.findOne({ MAC: entry.MAC });
+  if (entry.MAC && entry.IP && entry.updatedAt) {
+    var ARPEntry = ARPEntries.findOne({ MAC: entry.MAC });
 
-  // A new user connected to the router
-  // If MAC address doesn't exist in mongodb, add it
-  if (!ARPEntry) {
+    // A new user connected to the router
+    // If MAC address doesn't exist in mongodb, add it
+    if (!ARPEntry) {
 
-    var response;
+      var response;
 
-    try {
-      response = HTTP.call("POST", "http://api.macvendors.com/" + entry.MAC);
-    } catch (e) {
-      // Got a network error, time-out or HTTP error in the 400 or 500 range.
-      // Do nothing continue
+      try {
+        response = HTTP.call("POST", "http://api.macvendors.com/" + entry.MAC);
+      } catch (e) {
+        // Got a network error, time-out or HTTP error in the 400 or 500 range.
+        // Do nothing continue
+      }
+
+      if (response && response.content) {
+        entry.company = response.content;
+      } else {
+        console.log('error: could not get response from macvendors');
+        console.log(response);
+      }
+
+      ARPEntries.insert(entry);
     }
 
-    if (response && response.content) {
-      entry.company = response.content;
-    } else {
-      console.log('error: could not get response from macvendors');
-      console.log(response);
-    }
-
-    ARPEntries.insert(entry);
-  }
-
-  // The user changed IP address
-  // If MAC address exists in mongodb and different IP address, update entry
-  if (ARPEntry) {
-    if (ARPEntry.IP !== entry.IP) {
-      ARPEntries.update(ARPEntry, { $set: { IP: entry.IP } });
+    // The user changed IP address
+    // If MAC address exists in mongodb and different IP address, update entry
+    if (ARPEntry) {
+      if (ARPEntry.IP !== entry.IP) {
+        ARPEntries.update(ARPEntry, { $set: { IP: entry.IP } });
+      }
     }
   }
 }
