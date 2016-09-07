@@ -1,33 +1,30 @@
 <template name="admin">
-    <div class="top ui container">
-        <div class="ui secondary pointing menu">
-            <a class="usersButton item" href="#">
-                Users
-            </a>
-            <a class="controlsButton item" href="#">
-                Controls
-            </a>
-            <a class="organisationsButton item" href="#">
-                Organisations
-            </a>
-        </div>
+    <div class="ui secondary pointing menu">
+        <a class="usersButton item" href="#">
+            Users
+        </a>
+        <a class="organisationsButton item" href="#">
+            Organizations
+        </a>
     </div>
     {{> Template.dynamic template=tab}}
 </template>
+
 <template name="userPhoto">
     <img class="ui small image" src="{{profilePictureUrl size=300}}">
 </template>
+
 <template name="admin_users">
-    {{> collectionTable collection=users class="table table-bordered table-hover" settings=settings }}
-</template>
-<template name="admin_controls">
-    <div class="ui item">
-        <a class="ui button" id="flushdb" href="#">FlushDB</a>
+    <div>
+        <div class="ui item">
+            <a class="ui button" id="flushdb" href="#">FlushDB</a>
+        </div>
+        {{> collectionTable collection=users class="table table-bordered table-hover" settings=settings }}
     </div>
 </template>
 
 <template name="admin_error_button">
-    <button id="errorButton" class="button item" value={{_id}}>Show Error</button>
+    <button id="errorButton" class="button item" value={{_id}}>Full log</button>
 </template>
 
 <template name="admin_success_status">
