@@ -55,11 +55,13 @@ Template.admin_users.helpers({
     }
 });
 
-Template.admin_organisations.helpers({
+Template.admin_success_status.helpers({
     isSuccess: function(statusCode) {
         return 200 == statusCode;
-    },
+    }
+});
 
+Template.admin_organisations.helpers({
     settings: function() {
         return {
             onDelete: function(params) {
@@ -69,16 +71,15 @@ Template.admin_organisations.helpers({
             rowsPerPage: 10,
             showFilter: true,
             fields: [
-                { key: 'orgLog.statusCode', label: 'Success', tmpl: Template.admin_success_status },
-                { key: 'orgLog.lastSuccess', label: 'Last success' },
-                { key: 'orgLog.url', label: 'URL' },
-                { key: 'orgLog.statusCode', label: 'status code' },
-                { key: 'orgLog.error', label: 'Error', tmpl: Template.error_view },
+                { key: 'statusCode', label: 'Success', tmpl: Template.admin_success_status },
+                { key: 'lastSuccess', label: 'Last success' },
+                { key: 'url', label: 'URL' },
+                { key: 'error', label: 'Error', tmpl: Template.admin_error_button },
             ]
         };
     },
     orgLogs: function() {
-        return App.Collections.OrgLogs.find({}).fetch();
+        return App.Collections.OrgLogs;
     }
 })
 

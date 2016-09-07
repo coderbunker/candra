@@ -1,3 +1,5 @@
+import logs from '../lib/collections/OrgLogs.js';
+
 function oauthConfig(service, clientId, secret) {
     check(service, String);
     check(clientId, String);
@@ -16,50 +18,16 @@ function initOrgs() {
     var directory = Meteor.http.call("GET", "http://spaceapi.net/directory.json?api=0.13");
     var urls = Object.keys(directory.data).map(function(k) {
         if (!App.Collections.Orgs.findOne({ space: k })) {
-
             Meteor.defer(function() {
-                // Execute http calls asynchronously so we don't block execution for client inbound client request
-                // Meteor.defer = Meteor.setTimeout(x, 0)
                 var url = directory.data[k];
-
-                var newLog = { 
-                    'statusCode': 200, 
-                    'url': url, 
-                    'data': null, 
-                    'errorMessage': {}, 
-                    'lastSuccess': null 
-                };
-
+                var newLog;
                 try {
                     var result = Meteor.http.call("GET", url);
-                    newLog.data = JSON.parse(result.content);
-                    newLog.lastSuccess = new Date();
+                    newLog = logs.createNewSuccessLog(url, JSON.parse(result.content));
                 } catch (e) {
-                    if (e.response) {
-                        newLog.statusCode = e.response.statusCode;
-                    } else {
-                        newLog.statusCode = undefined;
-                    }
-                    newLog.errorMessage = e;
+                    newLog = logs.createNewErrorLog(url, e);
                 }
-
-                var oldLog = App.Collections.OrgLogs.findOne({ 'url': url });
-
-                if (!oldLog) {
-                    App.Collections.OrgLogs.insert(newLog);
-                } else {
-                    var toUpdate = { 
-                        'statusCode': newLog.statusCode, 
-                        'errorMessage': newLog.errorMessage
-                    };
-                    if(newLog.data instanceof Object) {
-                        toUpdate.data = newLog.data;
-                    }
-                    if(newLog.statusCode == 200){
-                        toUpdate.lastSuccess = new Date();
-                    }
-                    App.Collections.OrgLogs.update({ 'url': url }, { $set: toUpdate });
-                }
+                logs.createOrUpdateLog(newLog);
 
                 return url;
             });

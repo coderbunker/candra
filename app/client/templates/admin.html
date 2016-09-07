@@ -27,19 +27,21 @@
 </template>
 
 <template name="admin_error_button">
-    <button id="errorButton" class="button item" value={{orgLog._id}}>Show Error</button>
+    <button id="errorButton" class="button item" value={{_id}}>Show Error</button>
 </template>
 
 <template name="admin_success_status">
-    {{#if isSuccess orgLog.statusCode}}
+    <div>
+    {{#if isSuccess statusCode}}
     <div class="ui label">
-        <i class="big green checkmark icon"></i> {{orgLog.statusCode}}
+        <i class="big green checkmark icon"></i> {{statusCode}}
     </div>
     {{else}}
     <div class="ui label">
-        <i class="big red minus icon"></i> {{orgLog.statusCode}}
+        <i class="big red minus icon"></i> {{statusCode}}
     </div>
     {{/if}}
+    </div>
 </template>
 
 <template name="admin_organisations">
