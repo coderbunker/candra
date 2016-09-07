@@ -3,6 +3,9 @@ RouterApi = new Restivus({
     version: 'v1'
 });
 
+ARPEntries = App.Collections.ARPEntries;
+APICalls = App.Collections.APICalls;
+
 var getEntries = function(arpTable) {
     console.log('processing arp table \n' + arpTable);
     entries = [];
@@ -27,7 +30,56 @@ var getEntries = function(arpTable) {
     return entries;
 };
 
-export {getEntries};
+var clearExpiredEntries = function(entries) {
+    // The user is not connected to the router anymore
+    // Clean up mongodb: if MAC address is in mongodb but not in router table, remove it from mongodb
+
+    var currentMAC = _.map(ARPEntries.find().fetch(), (entry) => entry.MAC);
+    var newMAC = _.map(entries, (entry) => entry.MAC);
+    var MACtoRemove = _.difference(currentMAC, newMAC);
+
+    MACtoRemove.forEach((MAC) => {
+        ARPEntries.remove({ MAC: MAC });
+    });
+
+    APICalls.update({ api: 'arp' }, { $set: { success: true } });
+}
+
+var associateEntry = function(entry) {
+    var ARPEntry = ARPEntries.findOne({ MAC: entry.MAC });
+
+    // A new user connected to the router
+    // If MAC address doesn't exist in mongodb, add it
+    if (!ARPEntry) {
+
+        var response;
+
+        try {
+            response = HTTP.call("POST", "http://api.macvendors.com/" + entry.MAC);
+        } catch (e) {
+            // Got a network error, time-out or HTTP error in the 400 or 500 range.
+            // Do nothing continue
+        }
+
+        if (response && response.content) {
+            entry.company = response.content;
+        } else {
+            console.log('error: could not get response from macvendors');
+            console.log(response);
+        }
+
+        ARPEntries.insert(entry);
+    }
+
+    // The user changed IP address
+    // If MAC address exists in mongodb and different IP address, update entry
+    if (ARPEntry) {
+        if (ARPEntry.IP !== entry.IP) {
+            ARPEntries.update(ARPEntry, { $set: { IP: entry.IP } });
+        }
+    }
+}
+
 
 RouterApi.addRoute(
     'arp/:name', {
@@ -36,9 +88,6 @@ RouterApi.addRoute(
         defaultHeaders: { 'Content-Type': 'application/json' }
     }, {
         post() {
-
-            var ARPEntries = App.Collections.ARPEntries;
-            var APICalls = App.Collections.APICalls;
             var request = this.request;
             var response = this.response;
             var key, arpTable, headers = request.headers;
@@ -97,58 +146,19 @@ RouterApi.addRoute(
 
             var arpTable = request.body.arpTable;
             console.log(arpTable);
-            
+
             var entries = getEntries(arpTable);
             console.log(entries);
 
 
             entries.forEach((entry) => {
 
-                var ARPEntry = ARPEntries.findOne({ MAC: entry.MAC });
+                associateEntry(entry);
 
-                // A new user connected to the router
-                // If MAC address doesn't exist in mongodb, add it
-                if (!ARPEntry) {
 
-                    var response;
-
-                    try {
-                        response = HTTP.call("POST", "http://api.macvendors.com/" + entry.MAC);
-                    } catch (e) {
-                        // Got a network error, time-out or HTTP error in the 400 or 500 range.
-                        // Do nothing continue
-                    }
-
-                    if (response && response.content) {
-                        entry.company = response.content;
-                    } else {
-                        console.log('error: could not get response from macvendors');
-                        console.log(response);
-                    }
-
-                    ARPEntries.insert(entry);
-                }
-
-                // The user changed IP address
-                // If MAC address exists in mongodb and different IP address, update entry
-                if (ARPEntry) {
-                    if (ARPEntry.IP !== entry.IP) {
-                        ARPEntries.update(ARPEntry, { $set: { IP: entry.IP } });
-                    }
-                }
             });
 
-            // The user is not connected to the router anymore
-            // Clean up mongodb: if MAC address is in mongodb but not in router table, remove it from mongodb
-            var currentMAC = _.map(ARPEntries.find().fetch(), (entry) => entry.MAC);
-            var newMAC = _.map(entries, (entry) => entry.MAC);
-            var MACtoRemove = _.difference(currentMAC, newMAC);
-
-            MACtoRemove.forEach((MAC) => {
-                ARPEntries.remove({ MAC: MAC });
-            });
-
-            APICalls.update({ api: 'arp' }, { $set: { success: true } });
+            clearExpiredEntries(entries);
 
             return { success: true, message: 'successfully retrieved data' };
 
@@ -172,3 +182,5 @@ SpaceApi.addRoute(
         }
     }
 );
+
+export { getEntries, clearExpiredEntries, associateEntry};

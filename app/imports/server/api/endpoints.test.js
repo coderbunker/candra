@@ -32,4 +32,10 @@ describe('users', function() {
     	console.log(result);
     	assert.deepEqual(result,processedThreeEntries);
     });
+
+    it('processes correct empty arpTables', function() {
+    	var result = getEntries(NoEntries);
+    	console.log(result);
+    	assert.deepEqual(result,[]);
+    });
 });
