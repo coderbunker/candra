@@ -57,7 +57,7 @@ describe('clearExpiredEntries', function() {
     assert.equal(ARPEntries.find().count(), 0);
   });
 
-  it('doesn\'t add new entries', function() {
+  it('does not add new entries', function() {
     clearExpiredEntries([entries[0], entries[1], entries[2], extraEntry]);
     assert.equal(ARPEntries.find().count(), 3);
   });

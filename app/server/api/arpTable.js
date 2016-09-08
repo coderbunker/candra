@@ -1,18 +1,18 @@
-import { isMAC, isIP } from '../regexes.js';
 import '../../lib/collections/ARPEntries.js';
 import '../../lib/collections/APICalls.js';
 
 ARPEntries = App.Collections.ARPEntries;
 APICalls = App.Collections.APICalls;
 
-const isMACreg = new RegExp("([0-9A-F]{2}[:-]){5}([0-9A-F]{2})");
-const isIPreg = new RegExp("(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])");
+export const isMACreg = new RegExp("([0-9A-F]{2}[:-]){5}([0-9A-F]{2})");
+export const isIPreg = new RegExp("(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])");
 
 var getEntries = function(arpTable) {
   entries = [];
   var rows = arpTable.split("\n");
 
   rows.forEach((row, index) => {
+    console.log(row);
     if (index === 0)
       return;
 
@@ -27,6 +27,9 @@ var getEntries = function(arpTable) {
     if(!MAC){
       throw new Error('no MAC');
     }
+
+    console.log(IP[0]);
+    console.log(MAC[0]);
 
     entries.push({
       'updatedAt': new Date(),

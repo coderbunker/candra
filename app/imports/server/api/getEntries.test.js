@@ -41,19 +41,19 @@ describe('arpTable', function() {
     assert.deepEqual(getEntries(NoEntries), []);
   });
 
-  it('doesn\'t allow no MAC address in entry', function() {
+  it('does not allow no MAC address in entry', function() {
     assert.throws(function(){
       getEntries(NoMAC);
     }, Error, 'no MAC')
   });
 
-  it('doesn\'t allow no IP address in entry', function() {
+  it('does not allow no IP address in entry', function() {
     assert.throws(function(){
       getEntries(NoIP);
     }, Error, 'no IP')
   });
 
-  it('doesn\'t allow no IP nor MAC address in entry', function() {
+  it('does not allow no IP nor MAC address in entry', function() {
     assert.throws(function(){
       getEntries(NoIPnorMAC);
     }, Error, 'no IP')

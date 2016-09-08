@@ -57,22 +57,22 @@ describe('associateEntry', function() {
   	assert.equal(ARPEntries.find().count(), 4);
   });
 
-  it('doesn\'t add the the entry if it is present',function(){
+  it('does not add the the entry if it is present',function(){
   	associateEntry(entries[0]);
   	assert.equal(ARPEntries.find().count(), 3);
   });
 
-  it('doesn\'t add the the entry if it is missing the MAC address',function(){
+  it('does not add the the entry if it is missing the MAC address',function(){
   	associateEntry(MissingMAC);
   	assert.equal(ARPEntries.find().count(), 3);
   });
 
-  it('doesn\'t add the the entry if it is missing the IP address',function(){
+  it('does not add the the entry if it is missing the IP address',function(){
   	associateEntry(MissingIP);
   	assert.equal(ARPEntries.find().count(), 3);
   });
 
-  it('doesn\'t add the the entry if it is missing the updatedAt field',function(){
+  it('does not add the the entry if it is missing the updatedAt field',function(){
   	associateEntry(MissingUpdatedAt);
   	assert.equal(ARPEntries.find().count(), 3);
   });
