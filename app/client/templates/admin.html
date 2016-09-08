@@ -42,5 +42,9 @@
 </template>
 
 <template name="admin_organisations">
-    {{> collectionTable collection=orgLogs class="table table-bordered table-hover" settings=settings }}
+    {{> collectionTable collection=orgLogs settings=settings }}
+</template>
+
+<template name="admin_log_url">
+    <a href={{url}}>{{url}}</a>
 </template>

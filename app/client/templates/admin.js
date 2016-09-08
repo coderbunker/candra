@@ -61,24 +61,24 @@ Template.admin_success_status.helpers({
 Template.admin_organisations.helpers({
     settings: function() {
         return {
-            onDelete: function(params) {
-                Meteor.call('users.remove', params.ids);
-            },
             collection: App.Collections.orgLogs,
-            rowsPerPage: 10,
+            rowsPerPage: 100,
             showFilter: true,
+            crudMenu: false,
             fields: [
                 { key: 'timestamp', label: 'Timestamp', sortOrder: 0, sortDirection: 'descending' },
                 { key: 'statusCode', label: 'Success', tmpl: Template.admin_success_status },
-                { key: 'url', label: 'URL' },
-                { key: 'error', label: 'Error', tmpl: Template.admin_error_button },
+                { key: 'url', label: 'URL', tmpl: Template.admin_log_url },
+                { key: 'successCount', label: 'Success' },
+                { key: 'failureCount', label: 'Failures' },
+                { key: 'error', label: 'Error', tmpl: Template.admin_error_button, sortable: false },
             ]
         };
     },
     orgLogs: function() {
         return App.Collections.OrgLogs;
     }
-})
+});
 
 Template.admin.events({
     'click .usersButton': function(event, template) {
