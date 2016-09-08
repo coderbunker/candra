@@ -44,10 +44,28 @@ describe('OrgLogs', function () {
     logs.createOrUpdateLog(successLog);
 
     var entry = logs.OrgLogs.findOne({url: TEST_URL});
+    chai.assert.instanceOf(entry.timestamp, Date);
     chai.assert.equal(entry.statusCode, 200);
     chai.assert.instanceOf(entry.lastSuccess, Date);
     chai.assert.equal(entry.error, null);
     chai.assert.equal(entry.data.payload, 'some string');
+  });
+
+  skip_client('success log followed by error log', function() {
+    var errorLog = logs.createNewErrorLog(TEST_URL, {response: {statusCode: 404}, message: 'this error'});
+    var successLog = logs.createNewSuccessLog(TEST_URL, {payload: 'some string'});
+
+    logs.createOrUpdateLog(successLog);
+
+    var originalSuccess = logs.OrgLogs.findOne({url: TEST_URL});
+
+    logs.createOrUpdateLog(errorLog);
+
+    var entry = logs.OrgLogs.findOne({url: TEST_URL});
+    chai.assert.instanceOf(entry.timestamp, Date);
+    chai.assert.equal(entry.statusCode, 404);
+    chai.assert.equal(entry.lastSuccess.getTime(), originalSuccess.lastSuccess.getTime());
+    chai.assert.equal(entry.error.message, 'this error');
   });
 
   skip_client('error object recorded', function() {
