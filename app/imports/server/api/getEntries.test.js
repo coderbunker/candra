@@ -41,36 +41,22 @@ describe('arpTable', function() {
     assert.deepEqual(getEntries(NoEntries), []);
   });
 
-  it('handles Two IP addresses in one entry', function() {
-    getEntries(DoubleIP);
+  it('doesn\'t allow no MAC address in entry', function() {
+    assert.throws(function(){
+      getEntries(NoMAC);
+    }, Error, 'no MAC')
   });
 
-  it('handles Two MAC addresses in one entry', function() {
-    getEntries(DoubleMAC);
+  it('doesn\'t allow no IP address in entry', function() {
+    assert.throws(function(){
+      getEntries(NoIP);
+    }, Error, 'no IP')
   });
 
-  it('handles no MAC address in one entry', function() {
-    getEntries(NoMAC);
-  });
-
-  it('handles no IP address in one entry', function() {
-    getEntries(NoIP);
-  });
-
-  it('handles no IP nor MAC address in one entry', function() {
-    getEntries(NoIPnorMAC);
-  });
-
-  it('handles multiple entries with same IP', function() {
-    getEntries(ReUsedIP);
-  });
-
-  it('handles multiple entries with same MAC', function() {
-    getEntries(ReUsedIP);
-  });
-
-  it('handles multiple entries with same MAC and IP', function() {
-    getEntries(ReUsedIPandMAC);
+  it('doesn\'t allow no IP nor MAC address in entry', function() {
+    assert.throws(function(){
+      getEntries(NoIPnorMAC);
+    }, Error, 'no IP')
   });
 
 });

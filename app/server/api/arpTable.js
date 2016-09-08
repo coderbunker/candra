@@ -5,42 +5,34 @@ import '../../lib/collections/APICalls.js';
 ARPEntries = App.Collections.ARPEntries;
 APICalls = App.Collections.APICalls;
 
-var getEntries = function(arpTable) {
+const isMACreg = new RegExp("([0-9A-F]{2}[:-]){5}([0-9A-F]{2})");
+const isIPreg = new RegExp("(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])");
 
+var getEntries = function(arpTable) {
   entries = [];
   var rows = arpTable.split("\n");
 
   rows.forEach((row, index) => {
     if (index === 0)
       return;
-    var values;
-    //remove double spaces
-    row = row.replace(/ +(?= )/g, '');
-    values = row.split(" ");
 
-    var IP;
-    var MAC;
+    row = row.toUpperCase();
 
-    //test if the field is an IP or MAC
-    values.forEach((field) => {
-      if (!IP && isIP(field)) {
-        IP = field;
-      } else if (!MAC) {
-        field = field.toUpperCase();
-        if (isMAC(field)) {
-          MAC = field;
-        }
-      }
-    })
+    var MAC = isMACreg.exec(row);
+    var IP = isIPreg.exec(row);
 
-    //if both fields are found in the row push.
-    if (IP && MAC) {
-      entries.push({
-        'updatedAt': new Date(),
-        'IP': IP,
-        'MAC': MAC
-      });
+    if(!IP){
+      throw new Error('no IP');
     }
+    if(!MAC){
+      throw new Error('no MAC');
+    }
+
+    entries.push({
+      'updatedAt': new Date(),
+      'IP': IP[0],
+      'MAC': MAC[0]
+    });
 
   });
 
@@ -99,4 +91,4 @@ var associateEntry = function(entry) {
   }
 }
 
-export { getEntries, clearExpiredEntries, associateEntry };
+export { getEntries, clearExpiredEntries, associateEntry, NoIPException, NoMACException };
