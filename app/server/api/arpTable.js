@@ -12,7 +12,6 @@ var getEntries = function(arpTable) {
   var rows = arpTable.split("\n");
 
   rows.forEach((row, index) => {
-    console.log(row);
     if (index === 0)
       return;
 
@@ -27,9 +26,6 @@ var getEntries = function(arpTable) {
     if(!MAC){
       throw new Error('no MAC');
     }
-
-    console.log(IP[0]);
-    console.log(MAC[0]);
 
     entries.push({
       'updatedAt': new Date(),
