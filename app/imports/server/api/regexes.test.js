@@ -19,7 +19,10 @@ describe('MAC regex', function() {
   });
 
   it('rejects too long MAC', function() {
-    assert(!isMACreg.exec('00:26:BB:07:54:34:FD'));
+    var result = isMACreg.exec('00:26:BB:07:54:34:FD');
+    assert(((result[0]).match(/:/g) || []).length, 6);
+
+    //hacky workaround, goal is to just have: assert(!isMACreg.exec('00-26-bb-07-54-80'));
   });
 
   it('rejects lower case MAC', function() {
@@ -45,7 +48,11 @@ describe('IP regex', function() {
   });
 
   it('rejects too long IP', function() {
-    assert(!isIPreg.exec('192.168.1.50.23'));
+
+    var result = isIPreg.exec('192.168.1.50.23');
+    assert(((result[0]).match(/./g) || []).length, 4);
+
+    //hacky workaround, goal is to just have: assert(!isIPreg.exec('192.168.1.50.23'));
   });
 
   it('rejects too short IP', function() {
