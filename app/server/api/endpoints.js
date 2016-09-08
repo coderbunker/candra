@@ -1,4 +1,4 @@
-import 'arpTable.js';
+import {associateEntry, clearExpiredEntries, getEntries} from '../api/arpTable.js';
 
 RouterApi = new Restivus({
     apiPath: 'routerapi/',
@@ -16,7 +16,6 @@ RouterApi.addRoute(
             var key, arpTable, headers = request.headers;
             var router = _.findWhere(App.routers, { name: this.urlParams.name });
 
-            var key = headers.authorization.substring('Bearer '.length);
 
             if (!router) {
                 return {
@@ -38,6 +37,7 @@ RouterApi.addRoute(
                 };
             }
 
+            var key = headers.authorization.substring('Bearer '.length);
 
             if (key !== router.key) {
                 return {
@@ -66,6 +66,8 @@ RouterApi.addRoute(
                     clientIP: request.headers['x-forwarded-for']
                 }
             });
+
+            entries = getEntries(request.body.arpTable);
 
             entries.forEach((entry) => {
                 associateEntry(entry);
