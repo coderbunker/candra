@@ -15,28 +15,34 @@ function oauthConfig(service, clientId, secret) {
 }
 
 function initOrgs() {
-    var directory = Meteor.http.call("GET", "http://spaceapi.net/directory.json?api=0.13");
-    var urls = Object.keys(directory.data).map(function(k) {
-        if (!App.Collections.Orgs.findOne({ space: k })) {
-            var url = directory.data[k];
-            Meteor.defer(function() {
-                var newLog;
-                try {
-                    var result = Meteor.http.call("GET", url);
-                    newLog = logs.createNewSuccessLog(url, JSON.parse(result.content));
-                } catch (e) {
-                    newLog = logs.createNewErrorLog(url, e);
-                }
-                logs.createOrUpdateLog(newLog);
+    try{
+        var directory = Meteor.http.call("GET", "http://spaceapi.net/directory.json?api=0.13");
+        console.log('fetching spaceAPI.');
+        var urls = Object.keys(directory.data).map(function(k) {
+            if (!App.Collections.Orgs.findOne({ space: k })) {
+                var url = directory.data[k];
+                Meteor.defer(function() {
+                    var newLog;
+                    try {
+                        var result = Meteor.http.call("GET", url);
+                        newLog = logs.createNewSuccessLog(url, JSON.parse(result.content));
+                    } catch (e) {
+                        newLog = logs.createNewErrorLog(url, e);
+                    }
+                    logs.createOrUpdateLog(newLog);
 
-                return url;
-            });
-        } else {
-            return '';
-        }
-    });
+                    return url;
+                });
+            } else {
+                return '';
+            }
+        });
 
-    return _.compact(urls);
+        return _.compact(urls);
+    } catch (e){
+        console.log('fetching spaceAPI has failed, error:');
+        console.log(e);
+    }
 }
 
 Meteor.startup(function() {
