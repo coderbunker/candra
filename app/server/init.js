@@ -42,9 +42,13 @@ function initOrgs() {
 Meteor.startup(function() {
     var config = getCurrentConfiguration();
     console.log(config);
-    if (config.github) {
-        console.log("Github login configured");
-        oauthConfig('github', config.github.clientId, config.github.secret);
+    if(config.environment == "local" && config.github.local){
+        console.log("Github Local login configured");
+        oauthConfig('github', config.github.local.clientId, config.github.local.secret);
+    }
+    if(config.environment == "develop" && config.github.develop){
+        console.log("Github Develop login configured");
+        oauthConfig('github', config.github.develop.clientId, config.github.develop.secret);
     }
 
     if (config.google) {
