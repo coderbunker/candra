@@ -17,6 +17,11 @@ var APICallSchemaObject = {
     type: String,
     label: "Client IP",
     optional: true
+  },
+  success: {
+    type: Boolean,
+    label: "Success status",
+    optional: true
   }
 };
 

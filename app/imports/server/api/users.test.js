@@ -3,7 +3,7 @@ import { chai } from 'meteor/practicalmeteor:chai';
 import { users } from '../../../server/api/users.js';
 
 var assert = chai.assert,
-    expect = chai.expect;
+  expect = chai.expect;
 
 const VALID_DOC = {
   profile: {
@@ -21,43 +21,43 @@ const VALID_DOC_MINIMAL = {
 };
 
 
-describe('users', function () {
-  it('rejects incorrect insert without email ', function () {
+describe('users', function() {
+  it('rejects incorrect insert without email ', function() {
     assert.throws(function() {
-      Meteor.call('users.insert', {profile: {name: 'Ricky Ng-Adam'}});
+      Meteor.call('users.insert', { profile: { name: 'Ricky Ng-Adam' } });
     }, "Match", 'Email is required');
   });
 
-  it('rejects missing created at', function () {
+  it('rejects missing created at', function() {
     assert.throws(function() {
-      Meteor.call('users.insert', {profile: {name: 'Ricky Ng-Adam', email: 'rngadam@example.com'}});
+      Meteor.call('users.insert', { profile: { name: 'Ricky Ng-Adam', email: 'rngadam@example.com' } });
     }, "Match", 'Created at is required');
   });
 
-  it('rejects invalid email', function () {
+  it('rejects invalid email', function() {
     assert.throws(function() {
-      Meteor.call('users.insert', {profile: {name: 'Ricky Ng-Adam', email: 'rngadam'}});
+      Meteor.call('users.insert', { profile: { name: 'Ricky Ng-Adam', email: 'rngadam' } });
     }, "Match", 'Email is required');
   });
 
-  it('accepts correct insert', function () {
+  it('accepts correct insert', function() {
     Meteor.call('users.insert', VALID_DOC);
   });
 
-  it('accepts correct insert even without name', function () {
+  it('accepts correct insert even without name', function() {
     Meteor.call('users.insert', VALID_DOC_MINIMAL);
   });
 
   it('does not accept removing createdAt in update', function() {
     var id = Meteor.users.insert(VALID_DOC);
     assert.throws(function() {
-      Meteor.call('users.update', {$set: {createdAt: null}}, id);
+      Meteor.call('users.update', { $set: { createdAt: null } }, id);
     }, 'Match', 'Created at is required');
   });
 
   it('accepts name update', function() {
     var id = Meteor.users.insert(VALID_DOC);
-    Meteor.call('users.update', {$set: {'profile.name': 'Not Ricky Ng-Adam'}}, id);
+    Meteor.call('users.update', { $set: { 'profile.name': 'Not Ricky Ng-Adam' } }, id);
   });
 
   it('removal of user', function() {
