@@ -1,5 +1,7 @@
 # CANDRA: Community Advanced Networked Directory & Resources Administration
 
+![codeship](https://codeship.com/projects/505f08c0-5864-0134-1499-0234bcb36ccb/status.jpg?branch=develop)
+
 This project was created as part of the Global Meteor 2015 competition (Oct 10th to Oct 12th 2015).
 
 [Our submission to the competition](docs/METEOR-2015.md)
