@@ -1,30 +1,28 @@
 Meteor.methods({
-  'user/updateProfilePicture': function(picture) {
+    'user/updateProfilePicture': function(picture) {
 
-    check(picture, String);
-    Meteor.users.update(this.userId, {$set: {'profile.picture': picture}});
+        check(picture, String);
+        Meteor.users.update(this.userId, { $set: { 'profile.picture': picture } });
 
-    return true;
-  },
+        return true;
+    },
 
-  'user/updateDevice': function (MAC, name, userId) {
+    'user/updateDevice': function(MAC, name) {
 
-    check(userId, String);
-    check(MAC, String);
-    check(name, Match.Optional(name));
+        userId = Meteor.userId();
 
-    if (!userId) {
-      userId = Meteor.userId();
+        check(userId, String);
+        check(MAC, String);
+        check(name, Match.Optional(name));
+
+        App.Services.Users.updateDevice(userId, { MAC: MAC, name: name });
+    },
+
+    'user/getRemoteIPAddress': function() {
+
+        if (this.isSimulation) return;
+
+        var clientIP = this.connection.clientAddress;
+        return clientIP;
     }
-
-    App.Services.Users.updateDevice(userId, {MAC: MAC, name: name});
-  },
-
-  'user/getRemoteIPAddress': function() {
-
-    if (this.isSimulation) return;
-
-    var clientIP = this.connection.clientAddress;
-    return clientIP;
-  }
 });
