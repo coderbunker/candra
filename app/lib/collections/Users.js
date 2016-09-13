@@ -41,7 +41,7 @@ var UserProfileSchema = new SimpleSchema({
     optional: true
   },
   devices: {
-    type: new SimpleSchema({
+    type: [new SimpleSchema({
       name: {
         type: String,
         optional: true
@@ -50,7 +50,7 @@ var UserProfileSchema = new SimpleSchema({
         type: String,
         optional: true
       }
-    }),
+    })],
     optional: true
   }
 });
