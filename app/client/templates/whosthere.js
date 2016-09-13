@@ -1,7 +1,21 @@
 Template.whosthere.onCreated(function () {
+    Meteor.subscribe('Meteor.arptable');
+});
 
-    this.connectedMembers = function () {
+Template.whosthere.onRendered(function() {
+
+    this.$('.ui.dropdown')
+        .dropdown();
+});
+
+
+Template.whosthere.helpers({
+
+    connectedMembers: function() {
         var ARPentries = App.Collections.ARPEntries.find();
+
+        console.log("ARPEntries :: ")
+        console.log(App.Collections.ARPEntries.find().fetch());
 
         var i = 0;
 
@@ -21,20 +35,6 @@ Template.whosthere.onCreated(function () {
                 unknown: user ? false : true
             };
         }), 'name'), 'order');
-    };
-});
-
-Template.whosthere.onRendered(function() {
-
-    this.$('.ui.dropdown')
-        .dropdown();
-});
-
-
-Template.whosthere.helpers({
-
-    connectedMembers: function() {
-        return Template.instance().connectedMembers();
     },
 
     unknownMemberClass: function() {

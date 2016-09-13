@@ -84,3 +84,7 @@ Meteor.publish("Meteor.users", function() {
 Meteor.publish("Meteor.orgLogs", function() {
     return App.Collections.OrgLogs.find({});
 });
+
+Meteor.publish("Meteor.arptable", function() {
+    return App.Collections.ARPEntries.find({});
+});
