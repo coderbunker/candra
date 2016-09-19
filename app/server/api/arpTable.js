@@ -12,7 +12,7 @@ var getEntries = function(arpTable) {
   var rows = arpTable.split("\n");
 
   rows.forEach((row, index) => {
-    if (index === 0)
+    if (index === 0 || row.length === 0)
       return;
 
     row = row.toUpperCase();
