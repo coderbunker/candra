@@ -1,22 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { chai } from 'meteor/practicalmeteor:chai';
 import { getEntries } from '../../../server/api/arpTable.js';
+import { processedThreeEntries, processedRealARP } from '../api/processed.js';
 
 var assert = chai.assert,
   expect = chai.expect;
 
 const testFilesPath = 'test/arpTable/';
-
-const processedThreeEntries = [{
-  IP: '192.168.1.11',
-  MAC: '8C:3A:E3:93:83:93'
-}, {
-  IP: '192.168.1.50',
-  MAC: '00:26:BB:07:54:80'
-}, {
-  IP: '192.168.1.18',
-  MAC: '3C:15:C2:CC:DC:2A'
-}];
 
 describe('arpTable', function() {
   it('processes correct arpTables', function() {
@@ -25,6 +15,14 @@ describe('arpTable', function() {
       delete result[i].updatedAt;
     }
     assert.deepEqual(result, processedThreeEntries);
+  });
+
+  it('processes another correct arpTables', function() {
+    var result = getEntries(Assets.getText(testFilesPath + 'realARP.txt'));
+    for (var i = result.length - 1; i >= 0; i--) {
+      delete result[i].updatedAt;
+    }
+    assert.deepEqual(result, processedRealARP);
   });
 
   it('processes empty arpTables', function() {
