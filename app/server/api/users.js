@@ -4,6 +4,7 @@ import { UserSchema, UserProfileSchema } from '../../lib/collections/Users.js';
 
 Meteor.methods({
   'users.insert'(doc) {
+    doc.createdAt = new Date();
     check(doc, UserSchema);
     Meteor.users.insert(doc);
   },

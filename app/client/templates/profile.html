@@ -23,6 +23,16 @@
     </div>
     {{/with}}
 
+    <h4>My MAC addresses</h4>
+    <div class="ui raised segment">
+        <div class="ui list">
+            {{#each macs localIPCandidates}}
+                <div class="item">{{MAC}} {{name}}</div>
+            {{/each}}
+        </div>
+    </div>
+
+    <h4>My addresses</h4>
     <div class="ui raised segment">
         <div class="ui list">
             <div class="item">My public IP address: {{remoteIPAddress}}</div>
