@@ -5,15 +5,6 @@ import { getEntries } from '../../../server/api/arpTable.js';
 var assert = chai.assert,
   expect = chai.expect;
 
-const DoubleIP = 'IP address       HW type     Flags       HW address            Mask     Device\r\n192.168.1.11     0x1         0x2         8c:3a:e3:93:83:93     *        br0     192.168.1.17';
-const DoubleMAC = 'IP address       HW type     Flags       HW address            Mask     Device\r\n192.168.1.11     0x1         0x2         8d:3a:e3:93:83:93     *        br0       8c:3a:e3:93:83:93';
-const NoMAC = 'IP address       HW type     Flags       HW address            Mask     Device\r\n192.168.1.11     0x1         0x2             *        br0     192.168.1.11 ';
-const NoIP = 'IP address       HW type     Flags       HW address            Mask     Device\r\n192.168     0x1         0x2             *        br0     8c:3a:e3:93:83:93';
-const NoIPnorMAC = 'IP address       HW type     Flags       HW address            Mask     Device\r\n192.168     0x1         0x2             *        br0   ';
-const ReUsedMAC = 'IP address       HW type     Flags       HW address            Mask     Device\r\n192.168.1.11     0x1         0x2         8c:3a:e3:93:83:93     *        br0\r\n192.168.1.50     0x1         0x2         8c:3a:e3:93:83:93     *        br0\r\n192.168.1.18     0x1         0x2         8c:3a:e3:93:83:93     *        br0';
-const ReUsedIP = 'IP address       HW type     Flags       HW address            Mask     Device\r\n192.168.1.50     0x1         0x2         8c:3a:e3:93:83:93     *        br0\r\n192.168.1.50     0x1         0x2         8c:3a:e3:93:83:94     *        br0\r\n192.168.1.50     0x1         0x2         8c:3a:e3:93:83:92     *        br0';
-const ReUsedIPandMAC = 'IP address       HW type     Flags       HW address            Mask     Device\r\n192.168.1.50     0x1         0x2         8c:3a:e3:93:83:93     *        br0\r\n192.168.1.50     0x1         0x2         8c:3a:e3:93:83:93     *        br0\r\n192.168.1.50     0x1         0x2         8c:3a:e3:93:83:93     *        br0';
-
 const testFilesPath = 'test/arpTable/';
 
 const processedThreeEntries = [{
@@ -42,19 +33,19 @@ describe('arpTable', function() {
 
   it('does not allow no MAC address in entry', function() {
     assert.throws(function(){
-      getEntries(NoMAC);
+      getEntries(Assets.getText(testFilesPath + 'noMAC.txt'));
     }, Error, 'no MAC')
   });
 
   it('does not allow no IP address in entry', function() {
     assert.throws(function(){
-      getEntries(NoIP);
+      getEntries(Assets.getText(testFilesPath + 'noIP.txt'));
     }, Error, 'no IP')
   });
 
   it('does not allow no IP nor MAC address in entry', function() {
     assert.throws(function(){
-      getEntries(NoIPnorMAC);
+      getEntries(Assets.getText(testFilesPath + 'noIPnorMAC.txt'));
     }, Error, 'no IP')
   });
 
